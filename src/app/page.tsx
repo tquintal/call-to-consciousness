@@ -1,9 +1,9 @@
 import Footer from "./components/Footer";
-import Header from "./components/header";
+import Header from "./components/Header";
 
 export default function Home() {
   return (
-    <main className="">
+    <main>
       <Header />
       <div className="p-8 bg-[#e3e1df] flex gap-8 justify-center items-center">
         <div className="rounded-full h-96 w-96 bg-zinc-300" />
