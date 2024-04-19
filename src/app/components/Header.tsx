@@ -24,7 +24,7 @@ const Header = () => {
       <MdMenu size={32} onClick={() => setIsMenuVisible(true)} cursor="pointer" className="sm:hidden" />
       {isMenuVisible && (
         <div className="h-full fixed w-full z-50 bg-[#F3F3F3] top-0 left-0 p-6">
-          <MdClose size={32} onClick={() => setIsMenuVisible(false)} cursor="pointer" className="right-12 top-10 absolute" />
+          <MdClose size={32} onClick={() => setIsMenuVisible(false)} cursor="pointer" className="right-8 top-10 absolute" />
           <div className="flex text-xl items-center justify-center h-full">
             <div className="flex flex-col gap-8">
               <span>Percurso</span>
