@@ -1,12 +1,14 @@
 "use client";
-import { MdMenu } from "react-icons/md";
+import { MdClose, MdMenu } from "react-icons/md";
 import useWindowSize from "../hooks/screenSize";
+import { useState } from "react";
 
 const Header = () => {
   const windowSize = useWindowSize();
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   return (
-    <div className="h-28 flex items-center pr-12 pl-12 justify-between bg-[#F3F3F3] border-b border-zinc-500">
+    <div className="h-28 flex items-center pr-12 pl-12 gap-4 justify-between bg-[#F3F3F3] border-b border-zinc-500">
       <div className="flex gap-4">
         <div className="rounded-full bg-orange-400 h-7 w-7" />
         <div className="flex flex-col">
@@ -15,7 +17,7 @@ const Header = () => {
         </div>
       </div>
       {windowSize !== "sm" && (
-        <div className="gap-2 md:flex hidden">
+        <div className="gap-2 flex">
           <span className="cursor-pointer">Percurso</span>
           <span>|</span>
           <span className="cursor-pointer">Serviços</span>
@@ -23,7 +25,19 @@ const Header = () => {
           <span className="cursor-pointer">Contacto</span>
         </div>
       )}
-      {windowSize === "sm" && <MdMenu size={32} />}
+      {windowSize === "sm" && <MdMenu size={32} onClick={() => setIsMenuVisible(true)} cursor="pointer" />}
+      {isMenuVisible && (
+        <div className="h-full w-full bg-[#F3F3F3] absolute top-0 left-0 p-6">
+          <MdClose size={32} onClick={() => setIsMenuVisible(false)} cursor="pointer" className="right-12 top-10 absolute" />
+          <div className="flex text-xl items-center justify-center h-full">
+            <div className="flex flex-col gap-8">
+              <span>Percurso</span>
+              <span>Serviços</span>
+              <span>Contacto</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
