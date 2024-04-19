@@ -1,10 +1,8 @@
 "use client";
 import { MdClose, MdMenu } from "react-icons/md";
-import useWindowSize from "../hooks/screenSize";
 import { useState } from "react";
 
 const Header = () => {
-  const windowSize = useWindowSize();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   return (
@@ -16,16 +14,14 @@ const Header = () => {
           <p className="text-sm">Marketing e comunicação consciente</p>
         </div>
       </div>
-      {windowSize !== "sm" && (
-        <div className="gap-2 flex">
-          <span className="cursor-pointer">Percurso</span>
-          <span>|</span>
-          <span className="cursor-pointer">Serviços</span>
-          <span>|</span>
-          <span className="cursor-pointer">Contacto</span>
-        </div>
-      )}
-      {windowSize === "sm" && <MdMenu size={32} onClick={() => setIsMenuVisible(true)} cursor="pointer" />}
+      <div className="gap-2 hidden sm:flex">
+        <span className="cursor-pointer">Percurso</span>
+        <span>|</span>
+        <span className="cursor-pointer">Serviços</span>
+        <span>|</span>
+        <span className="cursor-pointer">Contacto</span>
+      </div>
+      <MdMenu size={32} onClick={() => setIsMenuVisible(true)} cursor="pointer" className="sm:hidden" />
       {isMenuVisible && (
         <div className="h-full w-full bg-[#F3F3F3] absolute top-0 left-0 p-6">
           <MdClose size={32} onClick={() => setIsMenuVisible(false)} cursor="pointer" className="right-12 top-10 absolute" />
