@@ -17,7 +17,7 @@ type ContentType = {
     title?: string;
     subtitle?: string;
     link?: string;
-    content: string[];
+    content?: string[];
   }[];
 };
 
