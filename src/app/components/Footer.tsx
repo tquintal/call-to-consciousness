@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {

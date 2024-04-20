@@ -1,25 +1,28 @@
 "use client";
 import { MdClose, MdMenu } from "react-icons/md";
 import { useState } from "react";
+import Link from "next/link";
 
 const Header = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   return (
     <div className="h-28 flex items-center pl-8 pr-8 sm:pr-12 sm:pl-12 gap-4 justify-between bg-[#F3F3F3] border-b border-zinc-500">
-      <div className="flex gap-4">
+      <Link className="flex gap-4" href="/">
         <div className="rounded-full bg-orange-400 h-7 w-7" />
         <div className="flex flex-col">
           <b>Susana Quintal</b>
           <p className="text-sm">Marketing e comunicação consciente</p>
         </div>
-      </div>
+      </Link>
       <div className="gap-2 hidden sm:flex">
-        <span className="cursor-pointer">Percurso</span>
+        <Link href="/">Início</Link>
         <span>|</span>
-        <span className="cursor-pointer">Serviços</span>
+        <Link href="/path">Percurso</Link>
         <span>|</span>
-        <span className="cursor-pointer">Contacto</span>
+        <Link href="/services">Serviços</Link>
+        <span>|</span>
+        <Link href="/contact">Contacto</Link>
       </div>
       <MdMenu size={32} onClick={() => setIsMenuVisible(true)} cursor="pointer" className="sm:hidden" />
       {isMenuVisible && (
@@ -27,9 +30,10 @@ const Header = () => {
           <MdClose size={32} onClick={() => setIsMenuVisible(false)} cursor="pointer" className="right-8 top-10 absolute" />
           <div className="flex text-xl items-center justify-center h-full">
             <div className="flex flex-col gap-8">
-              <span>Percurso</span>
-              <span>Serviços</span>
-              <span>Contacto</span>
+              <Link href="/">Início</Link>
+              <Link href="/path">Percurso</Link>
+              <Link href="/services">Serviços</Link>
+              <Link href="/contact">Contacto</Link>
             </div>
           </div>
         </div>
