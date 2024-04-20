@@ -1,0 +1,125 @@
+[
+  {
+    "pathTitle": "Percurso profissional",
+    "items": [
+      {
+        "date": "2021 - atual",
+        "title": "Gestão e comunicação e projetos sociais",
+        "subtitle": "Rosto Solidário ONGD",
+        "content": [
+          "Comunicação para o Desenvolvimento e ED. Cidadania Global (criação de conteúdos online e offline)",
+          "Relatórios de disseminação de projetos financiados pela U.E. e Camões I.P.",
+          "Campanhas de sensibilização e de angariação de fundos",
+          "Assessoria de imprensa e Organização de eventos",
+          "Gestão e assistência de projetos de Erasmus+, da U.E. e Camões I.P."
+        ]
+      },
+      {
+        "date": "de - até",
+        "title": "Consultoria de comunicação",
+        "subtitle": "MSH - Missão Saúde para a Humanidade ONGD",
+        "content": [
+          "Administração Projeto Compra Solidária (loja online)",
+          "Assessoria de imprensa (PT e Guiné Bissau)",
+          "Campanha e evento de angariação de fundos",
+          "Criação de conteúdos audiovisuais; documentos institucionais e newsletters"
+        ]
+      },
+      {
+        "date": "de - até",
+        "title": "Responsável de comunicação",
+        "subtitle": "ESLIDER Portugal - Associação Portuguesa para a inovação social",
+        "content": [
+          "Planeamento, gestão e implementação do plano de comunicação",
+          "Avaliação, monitorização e elaboração de relatórios",
+          "Organização de eventos presenciais e online",
+          "Gestão de parcerias",
+          "Assistência a gestão de projetos",
+          "Promoção de projetos de Empreendedorismo Social"
+        ]
+      },
+      {
+        "date": "de - até",
+        "title": "Responsável de campanha",
+        "subtitle": "ATACA"
+      },
+      {
+        "date": "de - até",
+        "title": "SIKA PORTUGAL, S.A.",
+        "content": [
+          "Comunicação institucional e de produto",
+          "Gestão de projetos",
+          "Assessoria de imprensa",
+          "Planeamento de meios (estratégia, negociação e budget)",
+          "Organização de eventos",
+          "R.P., Responsabilidade social e patrocínios",
+          "Marketing Digital",
+          "Estudos de mercado e da concorrência",
+          "Lançamento de produtos & kits comerciais",
+          "Gestão de embalagens e rótulos",
+          "Plano de campanhas",
+          "Nova era de comunicação B2C e B2B"
+        ]
+      }
+    ]
+  },
+  {
+    "pathTitle": "Formação",
+    "items": [
+      {
+        "date": "de - até",
+        "title": "PG Gestão de Projetos de Cooperação para o Desenvolvimento",
+        "subtitle": "Univ. Católica Portuguesa",
+        "content": [
+          "Visão global da cooperação internacional",
+          "Gestão de organizações não-governamentais de cooperação para o desenvolvimento",
+          "Conceção e gestão de projetos de desenvolvimento"
+        ]
+      },
+      {
+        "date": "de - até",
+        "title": "Pós Graduação Marketing Digital",
+        "subtitle": "IPAM",
+        "content": [
+          "Plano de Marketing Digital",
+          "Monitorização e campanhas",
+          "Conteúdos para plataformas e meios digitais (SEO & SEM)"
+        ]
+      },
+      {
+        "date": "de - até",
+        "title": "Gestão de Marketing e comunicação",
+        "subtitle": "IPAM",
+        "content": [
+          "Marketing, Web-Marketing, Mkt direto e relacional",
+          "Social Media",
+          "Comunicação (interna/externa) e imagem",
+          "Organização de eventos",
+          "Estudos de Mercado",
+          "Relações Públicas",
+          "Gestão de Produtos / Serviços / Mercados",
+          "Gestão de trade marketing e merchandising"
+        ]
+      }
+    ]
+  },
+  {
+    "pathTitle": "Outras especializações",
+    "items": [
+      {
+        "content": [
+          "Gestão de redes sociais - Zona Verde",
+          "Curso de escrita criativa para Web - FLAG",
+          "Certificação de formador, CCP - ENA",
+          "Praticante de Prog. Neuro-Linguística (PNL) - Coaching na Hora",
+          "Comunicação assertiva - Zona Verde",
+          "Inteligência emocional - Zona Verde",
+          "Workshop de fotografia - Trilhos da Terra",
+          "Gestão pessoal em missão humanitária - Passo Positivo",
+          "Empreendedorismo social - Pista Mágica",
+          "Gestão de equipas e essência do voluntariado - Pista Mágica"
+        ]
+      }
+    ]
+  }
+]

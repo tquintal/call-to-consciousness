@@ -30,10 +30,18 @@ const Header = () => {
           <MdClose size={32} onClick={() => setIsMenuVisible(false)} cursor="pointer" className="right-8 top-10 absolute" />
           <div className="flex text-xl items-center justify-center h-full">
             <div className="flex flex-col gap-8">
-              <Link href="/">Início</Link>
-              <Link href="/path">Percurso</Link>
-              <Link href="/services">Serviços</Link>
-              <Link href="/contact">Contacto</Link>
+              <Link href="/" onClick={() => setIsMenuVisible(false)}>
+                Início
+              </Link>
+              <Link href="/path" onClick={() => setIsMenuVisible(false)}>
+                Percurso
+              </Link>
+              <Link href="/services" onClick={() => setIsMenuVisible(false)}>
+                Serviços
+              </Link>
+              <Link href="/contact" onClick={() => setIsMenuVisible(false)}>
+                Contacto
+              </Link>
             </div>
           </div>
         </div>

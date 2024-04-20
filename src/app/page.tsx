@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <div className="p-8 bg-[#e3e1df] flex gap-8 justify-center lg:items-center max-sm:items-center items-start lg:flex-row flex-col">
+    <div className="p-8 bg-[#E3E1DF] flex gap-8 justify-center lg:items-center max-sm:items-center items-start lg:flex-row flex-col">
       <div className="rounded-full w-full max-sm:pb-[100%] sm:h-96 sm:w-96 bg-zinc-300" />
       <div className="lg:max-w-[420px] flex flex-col gap-8">
         <div className="flex items-center justify-between">
