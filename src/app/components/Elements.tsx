@@ -20,6 +20,6 @@ export const SmallerTitle = ({ children }: { children: ReactNode }) => {
   return <h3 className="font-semibold">{children}</h3>;
 };
 
-export const Divider = () => {
-  return <div className="border border-b-0 border-zinc-400 w-full" />;
+export const Divider = ({ className }: { className?: string }) => {
+  return <div className={`border border-b-0 border-zinc-400 w-full ${className ? className : ""}`} />;
 };
