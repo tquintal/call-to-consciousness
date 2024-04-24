@@ -25,7 +25,7 @@ export default function Services() {
                 </ul>
               ))}
             </div>
-            <div className="h-72 w-96 bg-slate-300" />
+            <div className="h-72 w-full md:max-w-96 bg-slate-300" />
           </div>
         ))}
         <Divider className="mt-4 mb-4" />

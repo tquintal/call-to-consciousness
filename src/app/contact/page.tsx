@@ -1,3 +1,5 @@
+import { Layout } from "../components/Elements";
+
 export default function Contact() {
-  return <>Contact.</>;
+  return <Layout>Contact.</Layout>;
 }

@@ -17,7 +17,7 @@ export default function Contact() {
   const content: ContentType[] = data;
 
   return (
-    <div className="flex flex-col pb-8 bg-[#F3F3F3]">
+    <div className="flex flex-col pb-8 bg-[#F3F3F3] pt-28">
       <div className="w-full h-44 bg-slate-300" />
       <div className="flex flex-col gap-8 2xl:pr-52 2xl:pl-52 p-8">
         {content.map((el, i) => (
