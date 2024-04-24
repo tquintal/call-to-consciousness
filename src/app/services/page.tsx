@@ -47,35 +47,30 @@ export default function Services() {
           <form className="flex flex-col gap-4 lg:w-fit">
             <Title>Orçamentos e dúvidas</Title>
             <span>Por favor insira os seus dados e mensagem</span>
-            <div className="flex gap-4 flex-col md:flex-row">
+            <div className="flex gap-4 flex-col md:flex-row text-sm">
               <div className="flex flex-col gap-1">
-                <label className="text-sm">Nome:</label>
-                <input type="text" id="fname" name="fname" className="p-2 border border-black outline-none bg-transparent text-sm" />
-                <label className="text-sm">Apelido:</label>
-                <input type="text" id="lname" name="lname" className="p-2 border border-black outline-none bg-transparent text-sm" />
-                <label className="text-sm">Email:</label>
-                <input type="text" id="email" name="email" className="p-2 border border-black outline-none bg-transparent text-sm" />
-                <label className="text-sm">Assunto:</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  className="p-2 border border-black outline-none bg-transparent text-sm"
-                />
+                <label>Nome:</label>
+                <input type="text" id="fname" name="fname" className="p-2 border border-black outline-none bg-transparent" />
+                <label>Apelido:</label>
+                <input type="text" id="lname" name="lname" className="p-2 border border-black outline-none bg-transparent" />
+                <label>Email:</label>
+                <input type="text" id="email" name="email" className="p-2 border border-black outline-none bg-transparent" />
+                <label>Assunto:</label>
+                <input type="text" id="subject" name="subject" className="p-2 border border-black outline-none bg-transparent " />
               </div>
               <div className="flex flex-col w-full gap-1">
-                <label className="text-sm">Mensagem:</label>
+                <label>Mensagem:</label>
                 <textarea
                   id="message"
                   name="message"
-                  className="p-2 border min-h-52 h-full w-full lg:w-96 resize-none border-black outline-none bg-transparent text-sm"
+                  className="p-2 border min-h-52 h-full w-full lg:w-96 resize-none border-black outline-none bg-transparent"
                 />
               </div>
             </div>
             <input
               type="submit"
               value="Submeter"
-              className="cursor-pointer border text-sm transition duration-300 w-full hover:bg-slate-400 bg-slate-300 p-2 text-white"
+              className="text-sm cursor-pointer border transition duration-300 w-full hover:bg-slate-400 bg-slate-300 p-2 text-white"
             />
           </form>
         </div>
