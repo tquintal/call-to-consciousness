@@ -1,5 +1,11 @@
-import { Layout } from "../components/Elements";
+import { Layout, Title } from "../components/Elements";
 
 export default function Contact() {
-  return <Layout>Contact.</Layout>;
+  return (
+    <Layout>
+      <div className="flex flex-col gap-4">
+        <Title>Contacto</Title>
+      </div>
+    </Layout>
+  );
 }
