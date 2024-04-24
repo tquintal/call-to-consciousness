@@ -44,13 +44,13 @@ export default function Contact() {
             <textarea
               id="message"
               name="message"
-              className="p-2 border min-h-36 w-full resize-none border-black outline-none bg-transparent"
+              className="h-28 p-2 border w-full resize-none border-black outline-none bg-transparent"
             />
           </div>
           <input
             type="submit"
             value="Enviar"
-            className="rounded-full h-28 self-center col-span-1 text-sm cursor-pointer border transition duration-300 w-full hover:bg-slate-400 bg-slate-300 p-2 text-white"
+            className="rounded-full self-end col-span-1 h-28 text-sm cursor-pointer border transition duration-300 w-full hover:bg-slate-400 bg-slate-300 p-2 text-white"
           />
         </form>
       </div>
