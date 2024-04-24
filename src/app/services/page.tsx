@@ -49,17 +49,17 @@ export default function Services() {
             <span>Por favor insira os seus dados e mensagem</span>
             <div className="flex gap-4 flex-col md:flex-row text-sm">
               <div className="flex flex-col gap-1">
-                <label>Nome:</label>
+                <label>Nome</label>
                 <input type="text" id="fname" name="fname" className="p-2 border border-black outline-none bg-transparent" />
-                <label>Apelido:</label>
+                <label>Apelido</label>
                 <input type="text" id="lname" name="lname" className="p-2 border border-black outline-none bg-transparent" />
-                <label>Email:</label>
+                <label>E-mail*</label>
                 <input type="text" id="email" name="email" className="p-2 border border-black outline-none bg-transparent" />
-                <label>Assunto:</label>
+                <label>Assunto*</label>
                 <input type="text" id="subject" name="subject" className="p-2 border border-black outline-none bg-transparent " />
               </div>
               <div className="flex flex-col w-full gap-1">
-                <label>Mensagem:</label>
+                <label>Mensagem*</label>
                 <textarea
                   id="message"
                   name="message"
