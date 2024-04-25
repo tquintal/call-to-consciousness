@@ -1,8 +1,7 @@
-"use client";
 import Link from "next/link";
 import data from "../data/path.json";
 import { Divider, SmallerTitle, SubTitle, Title } from "../components/Elements";
-import { motion } from "framer-motion";
+import { Motion } from "../components/Motion";
 
 type ContentType = {
   pathTitle: string;
@@ -13,20 +12,6 @@ type ContentType = {
     link?: string;
     content?: string[];
   }[];
-};
-
-const motionProps = {
-  initial: {
-    x: 25,
-  },
-  whileInView: {
-    x: 0,
-    transition: {
-      duration: 0.8,
-    },
-  },
-  viewport: { once: true },
-  className: "pt-4 grid grid-flow-row xl:grid-flow-col xl:grid-cols-8 xl:pt-0",
 };
 
 export default function Path() {
@@ -42,7 +27,7 @@ export default function Path() {
               <Title>{el.pathTitle}</Title>
               <div className="xl:col-span-6">
                 {el.items.map((item, i) => (
-                  <motion.div key={i} {...motionProps}>
+                  <Motion key={i} className="pt-4 grid grid-flow-row xl:grid-flow-col xl:grid-cols-8 xl:pt-0">
                     <span className="xl:col-span-1 font-light">{item.date}</span>
                     <div className="xl:col-span-7">
                       <SubTitle>{item.title}</SubTitle>
@@ -60,7 +45,7 @@ export default function Path() {
                         </ul>
                       )}
                     </div>
-                  </motion.div>
+                  </Motion>
                 ))}
               </div>
             </div>

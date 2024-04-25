@@ -1,5 +1,6 @@
 import { Divider, Layout, SmallerTitle, SubTitle, Title } from "../components/Elements";
 import data from "../data/services.json";
+import { Motion } from "../components/Motion";
 
 type ServicesType = {
   title: string;
@@ -15,7 +16,7 @@ export default function Services() {
       <div className="flex flex-col gap-4">
         <Title>Serviços</Title>
         {content.map((el, i) => (
-          <div key={i} className="flex flex-col gap-4 lg:flex-row justify-between">
+          <Motion key={i} className="flex flex-col gap-4 lg:flex-row justify-between">
             <div>
               <SubTitle>{el.title}</SubTitle>
               <SmallerTitle>{el.description}</SmallerTitle>
@@ -26,14 +27,14 @@ export default function Services() {
               ))}
             </div>
             <div className="h-72 w-full md:max-w-96 bg-slate-300" />
-          </div>
+          </Motion>
         ))}
         <Divider className="mt-4 mb-4" />
         <div>
           <span className="font-light">Ver mais:</span>
           <Title>Portfólio</Title>
         </div>
-        <div className="flex flex-wrap gap-4 justify-between">
+        <Motion className="flex flex-wrap gap-4 justify-between">
           <LinkCard link="https://google.com/" description="Hello world" />
           <LinkCard link="https://google.com/" description="Hello world" />
           <LinkCard link="https://google.com/" description="Hello world" />
@@ -41,9 +42,9 @@ export default function Services() {
           <LinkCard link="https://google.com/" description="Hello world" />
           <LinkCard link="https://google.com/" description="Hello world" />
           <LinkCard link="https://google.com/" description="Hello world" />
-        </div>
+        </Motion>
         <Divider className="mt-4 mb-4" />
-        <div className="flex flex-col gap-4 w-full lg:items-center">
+        <Motion className="flex flex-col gap-4 w-full lg:items-center">
           <form className="flex flex-col gap-4 lg:w-fit">
             <Title>Orçamentos e dúvidas</Title>
             <span>Por favor insira os seus dados e mensagem</span>
@@ -73,7 +74,7 @@ export default function Services() {
               className="text-sm cursor-pointer border transition duration-300 w-full hover:bg-slate-400 bg-slate-300 p-2 text-white"
             />
           </form>
-        </div>
+        </Motion>
       </div>
     </Layout>
   );
