@@ -1,6 +1,8 @@
+"use client";
 import Link from "next/link";
 import data from "../data/path.json";
 import { Divider, SmallerTitle, SubTitle, Title } from "../components/Elements";
+import { motion } from "framer-motion";
 
 type ContentType = {
   pathTitle: string;
@@ -13,7 +15,21 @@ type ContentType = {
   }[];
 };
 
-export default function Contact() {
+const motionProps = {
+  initial: {
+    x: 25,
+  },
+  whileInView: {
+    x: 0,
+    transition: {
+      duration: 0.8,
+    },
+  },
+  viewport: { once: true },
+  className: "pt-4 grid grid-flow-row xl:grid-flow-col xl:grid-cols-8 xl:pt-0",
+};
+
+export default function Path() {
   const content: ContentType[] = data;
 
   return (
@@ -26,7 +42,7 @@ export default function Contact() {
               <Title>{el.pathTitle}</Title>
               <div className="xl:col-span-6">
                 {el.items.map((item, i) => (
-                  <div key={i} className="pt-4 grid grid-flow-row xl:grid-flow-col xl:grid-cols-8 xl:pt-0">
+                  <motion.div key={i} {...motionProps}>
                     <span className="xl:col-span-1 font-light">{item.date}</span>
                     <div className="xl:col-span-7">
                       <SubTitle>{item.title}</SubTitle>
@@ -44,7 +60,7 @@ export default function Contact() {
                         </ul>
                       )}
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
