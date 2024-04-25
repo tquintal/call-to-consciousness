@@ -15,7 +15,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative">
       <Header />
-      <motion.div key={key} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeInOut", duration: 1 }}>
+      <motion.div key={key} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ ease: "easeInOut", duration: 0.8 }}>
         <main>{children}</main>
       </motion.div>
       <Footer />
