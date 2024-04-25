@@ -1,6 +1,6 @@
 import Link from "next/link";
 import data from "../data/path.json";
-import { Divider, Layout, SmallerTitle, SubTitle, Title } from "../components/Elements";
+import { Divider, SmallerTitle, SubTitle, Title } from "../components/Elements";
 
 type ContentType = {
   pathTitle: string;
