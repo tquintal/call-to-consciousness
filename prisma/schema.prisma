@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Path {
+  id        Int        @id @default(autoincrement())
+  pathTitle String
+  items     PathItem[]
+}
+
+model PathItem {
+  id       Int      @id @default(autoincrement())
+  date     String?
+  title    String?
+  subTitle String?
+  content  String[]
+  path     Path?    @relation(fields: [pathId], references: [id])
+  pathId   Int?
+}
+
+model Services {
+  id       Int      @id @default(autoincrement())
+  title    String
+  subTitle String?
+  content  String[]
+}
+
+model About {
+  id       Int    @id @default(autoincrement())
+  title    String
+  subTitle String
+  content  String
+  phone    String
+  email    String
+  linkedin String
+}
