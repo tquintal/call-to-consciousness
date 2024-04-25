@@ -7,7 +7,7 @@ const Header = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   return (
-    <div className="h-28 flex items-center pl-8 pr-8 sm:pr-12 sm:pl-12 gap-4 justify-between bg-[#F3F3F3] border-b border-zinc-500 fixed w-full">
+    <div className="h-28 z-50 flex items-center pl-8 pr-8 sm:pr-12 sm:pl-12 gap-4 justify-between bg-[#F3F3F3] border-b border-zinc-500 fixed w-full">
       <Link className="flex gap-4" href="/">
         <div className="rounded-full bg-orange-400 h-7 w-7" />
         <div className="flex flex-col">
