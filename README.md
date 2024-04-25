@@ -1,4 +1,4 @@
-## Portfolio Website - Next.js/React
+## Portfolio Website - Next.js/React, NextAuth, Prisma ORM and tRPC
 
 🌐 This project is a Next.js application created to serve as a portfolio website for my sister. It is currently under development.
 
