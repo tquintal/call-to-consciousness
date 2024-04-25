@@ -4,7 +4,7 @@ export default function Home() {
       <div className="rounded-full w-full max-sm:pb-[100%] sm:h-96 sm:w-96 bg-zinc-300" />
       <div className="lg:max-w-[420px] flex flex-col gap-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-8xl font-bold">Olá!</h1>
+          <h1 className="text-8xl font-bold max-sm:w-full text-center sm:text-left">Olá!</h1>
           <div className="sm:h-32 sm:w-32 h-24 w-24 bg-zinc-300 rounded-full max-sm:hidden" />
         </div>
         <div className="flex flex-col gap-4">
