@@ -1,4 +1,4 @@
-import { Layout, Title } from "../components/Elements";
+import { Layout, Title } from "../../components/Elements";
 
 export default function Contact() {
   return (

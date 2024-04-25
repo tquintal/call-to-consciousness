@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Title } from "./components/Elements";
+import { Title } from "../components/Elements";
 
 export default function NotFound() {
   return (

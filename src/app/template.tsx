@@ -2,8 +2,8 @@
 
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const paths = ["/", "/path", "/services", "/contact"];

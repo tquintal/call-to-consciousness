@@ -1,6 +1,6 @@
-import { Divider, Layout, SmallerTitle, SubTitle, Title } from "../components/Elements";
+import { Divider, Layout, SmallerTitle, SubTitle, Title } from "../../components/Elements";
 import data from "../data/services.json";
-import { Motion } from "../components/Motion";
+import { Motion } from "../../components/Motion";
 
 type ServicesType = {
   title: string;
