@@ -41,7 +41,15 @@ const Header = () => {
             Contacto
           </Link>
           <span className="text-zinc-400">|</span>
-          <span className="text-zinc-400">Modo edição</span>
+          <span
+            className="text-zinc-400"
+            onClick={() => {
+              setPreviewMode(!previewMode);
+              setIsMenuVisible(false);
+            }}
+          >
+            {previewMode ? "Editar" : "Previsualizar"}
+          </span>
           <span className="text-zinc-400">|</span>
           <span className="text-zinc-400">Terminar sessão</span>
         </div>
