@@ -12,12 +12,12 @@ export const About = ({ data }: { data: AboutType | null }) => {
   const [content, setContent] = useState(data);
   const { previewMode, setPreviewMode } = usePreviewModeContext();
 
-  const update = api.about.update.useMutation({
-    onSuccess: () => {
-      setPreviewMode(true);
-      router.refresh();
-    },
-  });
+  // const update = api.about.update.useMutation({
+  //   onSuccess: () => {
+  //     setPreviewMode(true);
+  //     router.refresh();
+  //   },
+  // });
 
   return (
     <>
@@ -57,13 +57,13 @@ export const About = ({ data }: { data: AboutType | null }) => {
               />
               <button
                 className="border p-3 bg-zinc-300"
-                onClick={() =>
-                  update.mutate({
-                    title: content?.title ?? "Olá",
-                    subTitle: content?.subTitle ?? "Sobre mim",
-                    content: content?.content ?? "...",
-                  })
-                }
+                // onClick={() =>
+                //   update.mutate({
+                //     title: content?.title ?? "Olá",
+                //     subTitle: content?.subTitle ?? "Sobre mim",
+                //     content: content?.content ?? "...",
+                //   })
+                // }
               >
                 Guardar
               </button>
