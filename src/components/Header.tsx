@@ -3,8 +3,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { usePreviewModeContext } from "@/context/PreviewMode";
 
 const Header = () => {
+  const { previewMode, setPreviewMode } = usePreviewModeContext();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const pathname = usePathname();
 
@@ -38,6 +40,10 @@ const Header = () => {
           <Link href="/contact" className={pathname === "/contact" ? "text-orange-600" : ""}>
             Contacto
           </Link>
+          <span className="text-zinc-400">|</span>
+          <span className="text-zinc-400">Modo edição</span>
+          <span className="text-zinc-400">|</span>
+          <span className="text-zinc-400">Terminar sessão</span>
         </div>
         <MdMenu size={32} onClick={() => setIsMenuVisible(true)} cursor="pointer" className="sm:hidden" />
         <AnimatePresence>
