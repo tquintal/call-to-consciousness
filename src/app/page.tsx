@@ -1,9 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
+
+import { EditAbout } from "@/components/EditAbout";
+import { prisma } from "@/server/db";
+
 import avatar from "../../public/avatar.jpg";
 import call_to_consciousness from "../../public/call-to-consciousness.png";
 
-export default function Home() {
+export default async function Home() {
+  const data = await prisma.about.findFirst();
+  if (!data) return <div className="p-8 bg-[#E3E1DF] pt-36">Loading...</div>;
+
   return (
     <div className="p-8 bg-[#E3E1DF] pt-36 flex gap-8 justify-center lg:items-center max-sm:items-center items-start lg:flex-row flex-col">
       <Image
@@ -15,7 +22,7 @@ export default function Home() {
       />
       <div className="lg:max-w-[420px] flex flex-col gap-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-8xl font-bold max-sm:w-full">Olá!</h1>
+          <h1 className="text-8xl font-bold max-sm:w-full">{data.title}</h1>
           <Image
             src={avatar}
             alt="Avatar"
@@ -25,18 +32,8 @@ export default function Home() {
           />
         </div>
         <div className="flex flex-col gap-4">
-          <h2 className="font-semibold text-xl -mb-4">Sobre mim</h2>
-          <p>Viso potenciar projetos com e sem fins lucrativos, de empreendedorismo social, desenvolvimento pessoal e de bem-estar.</p>
-          <p>
-            Identifico-me com uma vida em maior equidade e equanimidade, e no crescimento contínuo de todos.
-            <br />
-            Acredito no potencial do trabalho para uma maior consciência individual, como para com as interdependências globais.
-          </p>
-          <p>
-            Para isso, proponho uma Comunicação Visual e Estratégica que apoie iniciativas que promovam o desenvolvimento sustentável
-            dos mundos individuais e coletivos, para que as leve ao cumprimento dos seus objetivos e crescimento através os canais mais
-            adequados.
-          </p>
+          <h2 className="font-semibold text-xl -mb-4">{data.subTitle}</h2>
+          <EditAbout content={data.content} />
         </div>
         <div className="flex gap-4 sm:text-lg text-sm">
           <Link
