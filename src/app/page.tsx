@@ -1,11 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { EditAbout } from "@/components/EditAbout";
-import { prisma } from "@/server/db";
+import { About } from '@/components/About';
+import { api } from '@/trpc/server';
 
-import avatar from "../../public/avatar.jpg";
-import call_to_consciousness from "../../public/call-to-consciousness.png";
+import avatar from '../../public/avatar.jpg';
+import call_to_consciousness from '../../public/call-to-consciousness.png';
 
 export default async function Home() {
   const data = await prisma.about.findFirst();
