@@ -13,7 +13,7 @@ export const PreviewModeProvider = ({ children }: { children: ReactNode }) => {
 };
 
 function usePreviewProvider() {
-  const [previewMode, setPreviewMode] = useState<boolean>(false);
+  const [previewMode, setPreviewMode] = useState<boolean>(true);
 
   return {
     previewMode,

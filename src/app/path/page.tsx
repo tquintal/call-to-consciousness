@@ -5,8 +5,10 @@ import { Motion } from "../../components/Motion";
 import { CustomLink } from "@/components/CustomLink";
 
 type ContentType = {
+  id: number;
   pathTitle: string;
   items: {
+    id: number;
     date?: string;
     title?: string;
     titleLink?: string;
