@@ -9,7 +9,8 @@ export default function Home() {
       <Image
         src={call_to_consciousness}
         alt="Call to consciousness"
-        className="rounded-full sm:h-96 sm:w-96 bg-zinc-300 transition-all duration-500"
+        loading="lazy"
+        className="rounded-full sm:h-96 sm:w-96 bg-zinc-300"
       />
       <div className="lg:max-w-[420px] flex flex-col gap-8">
         <div className="flex items-center justify-between">
@@ -17,7 +18,8 @@ export default function Home() {
           <Image
             src={avatar}
             alt="Avatar"
-            className="sm:h-32 sm:w-32 h-24 w-24 rounded-full max-sm:hidden object-cover bg-zinc-300 transition-all duration-500"
+            loading="lazy"
+            className="sm:h-32 sm:w-32 h-24 w-24 rounded-full max-sm:hidden object-cover bg-zinc-300"
           />
         </div>
         <div className="flex flex-col gap-4">
@@ -54,11 +56,7 @@ export default function Home() {
             Contacto
           </Link>
         </div>
-        <Image
-          src={avatar}
-          alt="Avatar"
-          className="rounded-full w-72 h-72 sm:hidden object-cover bg-zinc-300 transition-all duration-500"
-        />
+        <Image src={avatar} alt="Avatar" loading="lazy" className="rounded-full w-72 h-72 sm:hidden object-cover bg-zinc-300" />
       </div>
     </div>
   );
