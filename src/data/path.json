@@ -1,8 +1,10 @@
 [
   {
+    "id": 1,
     "pathTitle": "Percurso profissional",
     "items": [
       {
+        "id": 1,
         "date": "2021 - atual",
         "title": "Gestão de comunicação e projetos sociais",
         "subtitle": "Rosto Solidário ONGD",
@@ -16,6 +18,7 @@
         ]
       },
       {
+        "id": 2,
         "date": "2020 - atual",
         "title": "Consultoria de comunicação",
         "subtitle": "MSH - Missão Saúde para a Humanidade ONGD",
@@ -28,6 +31,7 @@
         ]
       },
       {
+        "id": 3,
         "date": "2020 - 2021",
         "title": "Responsável de comunicação",
         "subtitle": "ESLIDER Portugal - Associação Portuguesa para a inovação social",
@@ -42,12 +46,14 @@
         ]
       },
       {
+        "id": 4,
         "date": "2019 - 2020",
         "title": "Responsável de campanha",
         "subtitle": "ATACA",
         "subtitleLink": "https://www.ataca.org/"
       },
       {
+        "id": 5,
         "date": "2012 - 2019",
         "title": "Mkt e Comunicação | Gestão de Produto",
         "subtitle": "SIKA PORTUGAL, S.A.",
@@ -70,9 +76,11 @@
     ]
   },
   {
+    "id": 2,
     "pathTitle": "Formação",
     "items": [
       {
+        "id": 1,
         "date": "2019 - 2020",
         "title": "PG Gestão de Projetos de Cooperação para o Desenvolvimento",
         "titleLink": "https://www.porto.ucp.pt/pt/central-oferta-formativa/pos-graduacao-gestao-projetos-cooperacao-para-desenvolvimento",
@@ -85,6 +93,7 @@
         ]
       },
       {
+        "id": 2,
         "date": "2015 - 2016",
         "title": "Pós Graduação Marketing Digital",
         "titleLink": "https://www.porto.ucp.pt/pt/central-oferta-formativa/pos-graduacao-gestao-projetos-cooperacao-para-desenvolvimento",
@@ -97,6 +106,7 @@
         ]
       },
       {
+        "id": 3,
         "date": "2001 - 2006",
         "title": "Gestão de Marketing e comunicação",
         "titleLink": "https://www.ipam.pt/licenciaturas-porto/gestao-marketing-porto/",
@@ -116,9 +126,11 @@
     ]
   },
   {
+    "id": 4,
     "pathTitle": "Outras especializações",
     "items": [
       {
+        "id": 1,
         "content": [
           "Gestão de redes sociais - Zona Verde",
           "Curso de escrita criativa para Web - FLAG",
