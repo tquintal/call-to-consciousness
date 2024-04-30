@@ -9,7 +9,7 @@ export default function Home() {
       <Image
         src={call_to_consciousness}
         alt="Call to consciousness"
-        loading="lazy"
+        loading="eager"
         className="rounded-full sm:h-96 sm:w-96 bg-zinc-300"
       />
       <div className="lg:max-w-[420px] flex flex-col gap-8">
@@ -18,7 +18,7 @@ export default function Home() {
           <Image
             src={avatar}
             alt="Avatar"
-            loading="lazy"
+            loading="eager"
             className="sm:h-32 sm:w-32 h-24 w-24 rounded-full max-sm:hidden object-cover bg-zinc-300"
           />
         </div>
@@ -56,7 +56,7 @@ export default function Home() {
             Contacto
           </Link>
         </div>
-        <Image src={avatar} alt="Avatar" loading="lazy" className="rounded-full w-72 h-72 sm:hidden object-cover bg-zinc-300" />
+        <Image src={avatar} alt="Avatar" loading="eager" className="rounded-full w-72 h-72 sm:hidden object-cover bg-zinc-300" />
       </div>
     </div>
   );
