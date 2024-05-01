@@ -1,11 +1,14 @@
 "use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { usePreviewModeContext } from "@/context/PreviewMode";
 import { api } from "@/trpc/react";
 import { About as AboutType } from "@prisma/client";
+
+import avatar from "../../public/avatar.jpg";
 
 export const About = ({ data }: { data: AboutType | null }) => {
   const router = useRouter();
@@ -14,8 +17,8 @@ export const About = ({ data }: { data: AboutType | null }) => {
 
   const update = api.about.update.useMutation({
     onSuccess: () => {
-      setPreviewMode(true);
       router.refresh();
+      setPreviewMode(true);
     },
   });
 
@@ -34,7 +37,12 @@ export const About = ({ data }: { data: AboutType | null }) => {
         ) : (
           <h1 className="text-8xl font-bold max-sm:w-full text-center sm:text-left">{data?.title}</h1>
         )}
-        <div className="sm:h-32 sm:w-32 h-24 w-24 bg-zinc-300 rounded-full max-sm:hidden" />
+        <Image
+          src={avatar}
+          alt="Avatar"
+          loading="eager"
+          className="sm:h-32 sm:w-32 h-24 w-24 rounded-full max-sm:hidden object-cover bg-zinc-300"
+        />
       </div>
       <div className="flex flex-col gap-4">
         {!previewMode ? (

@@ -1,69 +1,57 @@
 "use client";
 
 import Link from "next/link";
-import { Title, SubTitle, SmallerTitle, Divider } from "./Elements";
-import { Motion } from "./Motion";
+
 import { usePreviewModeContext } from "@/context/PreviewMode";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { PathItem } from "@prisma/client";
 
-type PathItem = {
-  id: number;
-  date?: string | null;
-  title?: string | null;
-  titleLink?: string | null;
-  subTitle?: string | null;
-  subTitleLink?: string | null;
-  content: string[];
-  pathId?: number | null;
-};
+import { Divider, SmallerTitle, SubTitle, Title } from "./Elements";
+import { Motion } from "./Motion";
 
-type Path = {
+type PathType = {
   id: number;
   pathTitle: string;
   items: PathItem[];
-};
+}[];
 
-export const PathContent = ({ content }: { content: Path[] }) => {
-  return (
-    <>
-      <div className="w-full h-44 bg-slate-300" />
-      <div className="flex flex-col gap-8 2xl:pr-52 2xl:pl-52 p-8">
-        {content.map((el, i) => (
-          <div key={i} className="flex flex-col gap-8">
-            <div className="grid grid-flow-row xl:grid-flow-col xl:grid-cols-8">
-              <Title>{el.pathTitle}</Title>
-              <div className="xl:col-span-6">
-                {el.items.map((item, i) => (
-                  <Motion key={i} className="pt-4 grid grid-flow-row xl:grid-flow-col xl:grid-cols-8 xl:pt-0">
-                    <span className="xl:col-span-1 font-light">{item.date}</span>
-                    <div className="xl:col-span-7">
-                      <SubTitle>{item.title}</SubTitle>
-                      <SmallerTitle>{item.subTitle}</SmallerTitle>
-                      {item.content && (
-                        <ul>
-                          {item.content.map((el, i) => (
-                            <li key={i}>- {el}</li>
-                          ))}
-                        </ul>
-                      )}
-                    </div>
-                  </Motion>
-                ))}
-              </div>
-            </div>
-            {i <= el.items.length && <Divider />}
-          </div>
-        ))}
-      </div>
-    </>
-  );
-};
-
-export const EditPathContent = ({ data }: { data: Path[] }) => {
-  const router = useRouter();
-  const [content, setContent] = useState(data);
+export const PathContent = ({ content }: { content: PathType }) => {
   const { previewMode, setPreviewMode } = usePreviewModeContext();
+
+  if (previewMode)
+    return (
+      <>
+        <div className="w-full h-44 bg-slate-300" />
+        <div className="flex flex-col gap-8 2xl:pr-52 2xl:pl-52 p-8">
+          {content.map((el, i) => (
+            <div key={i} className="flex flex-col gap-8">
+              <div className="grid grid-flow-row xl:grid-flow-col xl:grid-cols-8">
+                <Title>{el.pathTitle}</Title>
+                <div className="xl:col-span-6">
+                  {el.items.map((item, i) => (
+                    <Motion key={i} className="pt-4 grid grid-flow-row xl:grid-flow-col xl:grid-cols-8 xl:pt-0">
+                      <span className="xl:col-span-1 font-light">{item.date}</span>
+                      <div className="xl:col-span-7">
+                        <SubTitle>{item.title}</SubTitle>
+                        {item.subTitleLink && <Link href={item.subTitleLink} className="font-semibold" />}
+                        {!item.subTitleLink && <SmallerTitle>{item.subTitle}</SmallerTitle>}
+                        <span className="whitespace-pre-line">{item.content}</span>
+                      </div>
+                    </Motion>
+                  ))}
+                </div>
+              </div>
+              {i <= el.items.length && <Divider />}
+            </div>
+          ))}
+        </div>
+      </>
+    );
+
+  if (!previewMode) return <EditPathContent content={content} />;
+};
+
+const EditPathContent = ({ content }: { content: PathType }) => {
+  // const router = useRouter();
 
   return (
     <>
@@ -112,7 +100,6 @@ export const EditPathContent = ({ data }: { data: Path[] }) => {
             {i <= el.items.length && <Divider />}
           </div>
         ))}
-        <Divider />
         <button className="self-end border p-3 border-black text-green-500 bg-white fixed bottom-4 right-4 xl:bottom-8 xl:right-8 shadow-xl">
           Guardar alterações
         </button>
