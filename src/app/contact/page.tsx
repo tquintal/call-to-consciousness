@@ -1,6 +1,9 @@
 "use client";
 
+import "react-toastify/dist/ReactToastify.css";
+
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
 
 import { ContactForm } from "@/types/ContactForm";
 
@@ -27,21 +30,13 @@ export default function Contact() {
     e.preventDefault();
     setSubmitting(true);
 
-    console.log("Form data:", formData);
+    await toast.promise(sendEmail({ data: formData }), {
+      pending: "A enviar mensagem...",
+      success: "Obrigado pela sua mensagem, entrarei em contacto em breve!",
+      error: "Erro, por favor contacte o e-mail no rodapé",
+    });
 
-    try {
-      const response = await sendEmail({ data: formData });
-
-      if (response.ok) {
-        console.log("Formulário enviado com sucesso!");
-      } else {
-        console.error("Erro ao enviar formulário");
-      }
-    } catch (error) {
-      console.error("Erro ao enviar formulário:", error);
-    } finally {
-      setSubmitting(false);
-    }
+    setSubmitting(false);
   };
 
   return (
@@ -140,6 +135,7 @@ export default function Contact() {
           </div>
         </form>
       </div>
+      <ToastContainer position="bottom-right" autoClose={5000} closeOnClick />
     </Layout>
   );
 }

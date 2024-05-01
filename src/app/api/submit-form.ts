@@ -1,14 +1,10 @@
 "use server";
 
-import { NextApiRequest, NextApiResponse } from "next";
-
 import { ContactForm } from "@/types/ContactForm";
 
 import transporter from "../../utils/nodemailer";
 
 export default async function sendEmail({ data }: { data: ContactForm }) {
-  // const { name, email, message } = formData;
-
   try {
     await transporter.sendMail({
       from: data.email,
@@ -26,7 +22,6 @@ export default async function sendEmail({ data }: { data: ContactForm }) {
     });
     return { ok: true };
   } catch (error) {
-    console.error("Error:", error ?? "");
-    throw new Error("Error", error ?? "");
+    throw new Error("", error ?? "");
   }
 }
