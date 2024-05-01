@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { usePreviewModeContext } from "@/context/PreviewMode";
 
-const Header = () => {
+const FHeader = () => {
   const { previewMode, setPreviewMode } = usePreviewModeContext();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const pathname = usePathname();
@@ -86,4 +86,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default FHeader;

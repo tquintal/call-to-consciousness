@@ -14,13 +14,15 @@ model Path {
 }
 
 model PathItem {
-  id       Int      @id @default(autoincrement())
-  date     String?
-  title    String?
-  subTitle String?
-  content  String[]
-  path     Path?    @relation(fields: [pathId], references: [id])
-  pathId   Int?
+  id           Int      @id @default(autoincrement())
+  date         String?
+  title        String?
+  titleLink    String?
+  subTitle     String?
+  subTitleLink String?
+  content      String
+  path         Path?    @relation(fields: [pathId], references: [id])
+  pathId       Int?
 }
 
 model Services {
