@@ -1,9 +1,13 @@
 "use client";
 
+import "react-toastify/dist/ReactToastify.css";
+
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Header from "../components/Header";
+import { ToastContainer } from "react-toastify";
+
 import Footer from "../components/Footer";
+import Header from "../components/Header";
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const paths = ["/", "/path", "/services", "/contact"];
@@ -19,6 +23,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
         <main>{children}</main>
       </motion.div>
       <Footer />
+      <ToastContainer position="bottom-right" autoClose={5000} closeOnClick />
     </div>
   );
 }
