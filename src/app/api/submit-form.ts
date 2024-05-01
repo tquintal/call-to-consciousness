@@ -17,6 +17,7 @@ export default async function sendEmail({ data }: { data?: ContactFormType }) {
       ${data.fname ? `Nome: ${data.fname} ${data.lname}` : ""}
       ${data.phone ? `Telefone: ${data.phone}` : ""}      
       Mensagem: 
+      
       ${data.message}
       `,
     });
