@@ -46,6 +46,10 @@ export default function Services() {
         </Motion>
         <Divider className="mt-4 mb-4" />
         <Motion className="flex flex-col gap-4 w-full lg:items-center">
+          <div className="flex flex-col sm:items-center">
+            <Title>Orçamentos e dúvidas</Title>
+            <span>Por favor insira os seus dados e mensagem</span>
+          </div>
           <ContactForm />
         </Motion>
       </div>

@@ -8,11 +8,7 @@ import { ContactFormType } from "@/types/ContactFormType";
 
 const ContactForm = () => {
   const [submitting, setSubmitting] = useState(false);
-  const [formData, setFormData] = useState<ContactFormType>({
-    email: "test@email.com",
-    subject: "Subject",
-    message: "Message",
-  });
+  const [formData, setFormData] = useState<ContactFormType | undefined>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -26,12 +22,16 @@ const ContactForm = () => {
     e.preventDefault();
     setSubmitting(true);
 
+    const form = e.target as HTMLFormElement;
+
     await toast.promise(sendEmail({ data: formData }), {
       pending: "A enviar mensagem...",
       success: "Obrigado pela sua mensagem, entrarei em contacto em breve!",
       error: "Erro, por favor contacte o e-mail no rodapé",
     });
 
+    form.reset();
+    setFormData(undefined);
     setSubmitting(false);
   };
 
@@ -44,7 +44,6 @@ const ContactForm = () => {
           id="fname"
           name="fname"
           className="p-2 border border-black outline-none bg-transparent"
-          defaultValue={formData.fname}
           onChange={handleChange}
         />
       </div>
@@ -55,7 +54,6 @@ const ContactForm = () => {
           id="lname"
           name="lname"
           className="p-2 border border-black outline-none bg-transparent"
-          defaultValue={formData.lname}
           onChange={handleChange}
         />
       </div>
@@ -67,7 +65,6 @@ const ContactForm = () => {
           name="email"
           required
           className="p-2 border border-black outline-none bg-transparent"
-          defaultValue={formData.email}
           onChange={handleChange}
         />
       </div>
@@ -78,7 +75,6 @@ const ContactForm = () => {
           id="phone"
           name="phone"
           className="p-2 border border-black outline-none bg-transparent"
-          defaultValue={formData.phone}
           onChange={handleChange}
         />
       </div>
@@ -90,7 +86,6 @@ const ContactForm = () => {
           name="subject"
           required
           className="p-2 border border-black outline-none bg-transparent"
-          defaultValue={formData.subject ?? "Hello subject"}
           onChange={handleChange}
         />
       </div>
@@ -101,7 +96,6 @@ const ContactForm = () => {
           name="message"
           required
           className="h-28 p-2 border w-full resize-none border-black outline-none bg-transparent"
-          defaultValue={formData.message ?? "Hello world"}
           onChange={handleChange}
         />
       </div>

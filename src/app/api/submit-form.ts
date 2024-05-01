@@ -4,7 +4,9 @@ import { ContactFormType } from "@/types/ContactFormType";
 
 import transporter from "../../utils/nodemailer";
 
-export default async function sendEmail({ data }: { data: ContactFormType }) {
+export default async function sendEmail({ data }: { data?: ContactFormType }) {
+  if (!data) throw new Error("Data not found.");
+
   try {
     await transporter.sendMail({
       from: data.email,
@@ -12,8 +14,7 @@ export default async function sendEmail({ data }: { data: ContactFormType }) {
       subject: data.subject,
       text: `
       Nova mensagem de: ${data.email}
-      ${data.fname ? `Nome: ${data.fname}` : ""}
-      ${data.lname ? `Apelido: ${data.lname}` : ""}
+      ${data.fname ? `Nome: ${data.fname} ${data.lname}` : ""}
       ${data.phone ? `Telefone: ${data.phone}` : ""}
       
       Mensagem: 
