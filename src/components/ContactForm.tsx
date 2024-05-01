@@ -105,6 +105,7 @@ const ContactForm = () => {
           onChange={handleChange}
         />
       </div>
+      <span className="col-span-4 text-xs font-light text-slate-400 text-end sm:hidden">* Campos obrigatórios</span>
       <div className="col-span-4 sm:col-span-1 justify-end flex">
         <input
           type="submit"
@@ -113,7 +114,7 @@ const ContactForm = () => {
           className="rounded-full sm:self-end max-w-28 h-28 max-sm:h-20 max-sm:w-20 text-sm cursor-pointer border transition duration-300 w-full hover:bg-slate-400 bg-slate-300 p-2 text-white"
         />
       </div>
-      <span className="col-span-4 text-xs font-light text-slate-400">* Campos obrigatórios</span>
+      <span className="col-span-4 text-xs font-light text-slate-400 hidden sm:block">* Campos obrigatórios</span>
     </form>
   );
 };
