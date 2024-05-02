@@ -25,7 +25,9 @@ export const LinkCard = ({ src, description, link }: Portfolio) => {
             <span className="text-white text-lg font-bold">{description}</span>
           </div>
         </div>
-        <span className="font-light underline md:hidden ">- {description}</span>
+        <span className="font-light md:hidden">
+          - <span className={link ? "underline" : ""}>{description}</span>
+        </span>
       </CustomLink>
     </>
   );
