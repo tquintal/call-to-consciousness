@@ -14,7 +14,8 @@
       "Organização de eventos | Workshops",
       "Estabelecimento de parcerias"
     ],
-    "image": "/service-1.jpg"
+    "image": "/service-1.jpg",
+    "link": "https://www.instagram.com/msh.missaosaudeparaahumanidade/?hl=pt"
   },
   {
     "title": "Comunicação Institucional e de projetos",
@@ -26,6 +27,7 @@
       "Gestão de projetos",
       "Angariação de fundos"
     ],
-    "image": "/service-2.jpg"
+    "image": "/service-2.jpg",
+    "link": "http://missao.msh.pt/wp-content/uploads/2023/08/Relat%C3%B3rio-de-Atividades-MSH-2022.pdf"
   }
 ]

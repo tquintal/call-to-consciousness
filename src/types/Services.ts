@@ -3,6 +3,7 @@ export type ServicesType = {
   description?: string;
   content: string[];
   image?: string;
+  link?: string;
 };
 
 export type Portfolio = {

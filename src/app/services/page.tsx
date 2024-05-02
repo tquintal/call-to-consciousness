@@ -8,6 +8,7 @@ import { Divider, Layout, SmallerTitle, SubTitle, Title } from "../../components
 import { Motion } from "../../components/Motion";
 import portfolioData from "../../data/portfolio.json";
 import data from "../../data/services.json";
+import { CustomLink } from "@/components/CustomLink";
 
 export default function Services() {
   const content: ServicesType[] = data;
@@ -31,14 +32,16 @@ export default function Services() {
               ))}
             </div>
             {el.image ? (
-              <Image
-                loading="eager"
-                src={el.image}
-                alt={el.title}
-                width={400}
-                height={400}
-                className="h-72 w-full md:max-w-96 shadow-lg object-cover"
-              />
+              <CustomLink link={el.link}>
+                <Image
+                  loading="eager"
+                  src={el.image}
+                  alt={el.title}
+                  width={400}
+                  height={400}
+                  className="h-72 w-full md:max-w-96 shadow-lg object-cover"
+                />
+              </CustomLink>
             ) : (
               <div className="w-full h-72 md:max-w-96 bg-slate-300 shadow-lg" />
             )}

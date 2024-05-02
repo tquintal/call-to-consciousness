@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Portfolio } from "@/types/Services";
+import { CustomLink } from "./CustomLink";
 
 export const LinkCard = ({ src, description, link }: Portfolio) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -10,8 +11,8 @@ export const LinkCard = ({ src, description, link }: Portfolio) => {
   return (
     <>
       {isLoading && <div className="w-96 h-52 shadow-lg bg-gray-300 duration-75 animate-pulse" />}
-      <a href={link ?? "#"} rel="noopener noreferrer" target="_blank" className="flex flex-col gap-2">
-        <div className="relative group h-fit cursor-pointer shadow-lg">
+      <CustomLink link={link ?? "#"}>
+        <div className={`relative group h-fit shadow-lg ${link ? "cursor-pointer" : "cursor-default"}`}>
           <Image
             src={src}
             alt={description}
@@ -24,8 +25,8 @@ export const LinkCard = ({ src, description, link }: Portfolio) => {
             <span className="text-white text-lg font-bold">{description}</span>
           </div>
         </div>
-        <span className="md:hidden font-semibold">{description}</span>
-      </a>
+        <span className="md:hidden font-light">- {description}</span>
+      </CustomLink>
     </>
   );
 };
