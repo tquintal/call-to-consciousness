@@ -43,7 +43,7 @@ const ContactForm = () => {
           type="text"
           id="fname"
           name="fname"
-          className="p-2 border border-black outline-none bg-transparent"
+          className="p-2 border border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
         />
       </div>
@@ -53,7 +53,7 @@ const ContactForm = () => {
           type="text"
           id="lname"
           name="lname"
-          className="p-2 border border-black outline-none bg-transparent"
+          className="p-2 border border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
         />
       </div>
@@ -64,7 +64,7 @@ const ContactForm = () => {
           id="email"
           name="email"
           required
-          className="p-2 border border-black outline-none bg-transparent"
+          className="p-2 border border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
         />
       </div>
@@ -74,7 +74,7 @@ const ContactForm = () => {
           type="text"
           id="phone"
           name="phone"
-          className="p-2 border border-black outline-none bg-transparent"
+          className="p-2 border border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
         />
       </div>
@@ -85,7 +85,7 @@ const ContactForm = () => {
           id="subject"
           name="subject"
           required
-          className="p-2 border border-black outline-none bg-transparent"
+          className="p-2 border border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
         />
       </div>
@@ -95,7 +95,7 @@ const ContactForm = () => {
           id="message"
           name="message"
           required
-          className="h-28 p-2 border w-full resize-none border-black outline-none bg-transparent"
+          className="h-28 p-2 border w-full resize-none border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
         />
       </div>
