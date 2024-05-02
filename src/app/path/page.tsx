@@ -2,14 +2,16 @@ import Link from "next/link";
 import data from "../../data/path.json";
 import { Divider, SmallerTitle, SubTitle, Title } from "../../components/Elements";
 import { Motion } from "../../components/Motion";
+import { CustomLink } from "@/components/CustomLink";
 
 type ContentType = {
   pathTitle: string;
   items: {
     date?: string;
     title?: string;
+    titleLink?: string;
     subtitle?: string;
-    link?: string;
+    subtitleLink?: string;
     content?: string[];
   }[];
 };
@@ -35,13 +37,12 @@ export default function Path() {
                   <Motion key={i} className="pt-4 grid grid-flow-row xl:grid-flow-col xl:grid-cols-8 xl:pt-0">
                     <span className="xl:col-span-1 font-light">{item.date}</span>
                     <div className="xl:col-span-7">
-                      <SubTitle>{item.title}</SubTitle>
-                      {item.link && (
-                        <Link href={item.link} className="font-semibold">
-                          {item.subtitle}
-                        </Link>
-                      )}
-                      {!item.link && <SmallerTitle>{item.subtitle}</SmallerTitle>}
+                      <CustomLink link={item.titleLink} className="underline">
+                        <SubTitle>{item.title}</SubTitle>
+                      </CustomLink>
+                      <CustomLink link={item.subtitleLink} className="underline">
+                        <SmallerTitle>{item.subtitle}</SmallerTitle>
+                      </CustomLink>
                       {item.content && (
                         <ul>
                           {item.content.map((el, i) => (
