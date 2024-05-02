@@ -20,7 +20,7 @@ export default function Path() {
   return (
     <div className="flex flex-col pb-8 bg-[#F3F3F3] pt-28">
       <video loop autoPlay className="w-full h-44 bg-slate-300 object-cover">
-        <source src="/path-video.webm" type="video/webm" />
+        <source src="/video.webm" type="video/webm" />
         Your browser does not support the video tag.
       </video>
       <div className="flex flex-col gap-8 2xl:pr-52 2xl:pl-52 p-8">

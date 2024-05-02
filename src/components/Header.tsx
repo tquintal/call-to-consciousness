@@ -2,9 +2,11 @@ import { MdClose, MdMenu } from "react-icons/md";
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const pathname = usePathname();
 
   const handleMenuClose = () => {
     setIsMenuVisible(false);
@@ -20,13 +22,21 @@ const Header = () => {
         </div>
       </Link>
       <div className="gap-2 hidden sm:flex">
-        <Link href="/">Início</Link>
+        <Link href="/" className={pathname === "/" ? "text-orange-600" : ""}>
+          Início
+        </Link>
         <span>|</span>
-        <Link href="/path">Percurso</Link>
+        <Link href="/path" className={pathname === "/path" ? "text-orange-600" : ""}>
+          Percurso
+        </Link>
         <span>|</span>
-        <Link href="/services">Serviços</Link>
+        <Link href="/services" className={pathname === "/services" ? "text-orange-600" : ""}>
+          Serviços
+        </Link>
         <span>|</span>
-        <Link href="/contact">Contacto</Link>
+        <Link href="/contact" className={pathname === "/contact" ? "text-orange-600" : ""}>
+          Contacto
+        </Link>
       </div>
       <MdMenu size={32} onClick={() => setIsMenuVisible(true)} cursor="pointer" className="sm:hidden" />
       <AnimatePresence>
@@ -40,16 +50,16 @@ const Header = () => {
           >
             <MdClose size={32} onClick={handleMenuClose} cursor="pointer" className="right-8 top-10 fixed" />
             <div className="flex text-xl items-center flex-col gap-8 justify-center h-full">
-              <Link href="/" onClick={handleMenuClose}>
+              <Link href="/" onClick={handleMenuClose} className={pathname === "/" ? "text-orange-600" : ""}>
                 Início
               </Link>
-              <Link href="/path" onClick={handleMenuClose}>
+              <Link href="/path" onClick={handleMenuClose} className={pathname === "/path" ? "text-orange-600" : ""}>
                 Percurso
               </Link>
-              <Link href="/services" onClick={handleMenuClose}>
+              <Link href="/services" onClick={handleMenuClose} className={pathname === "/services" ? "text-orange-600" : ""}>
                 Serviços
               </Link>
-              <Link href="/contact" onClick={handleMenuClose}>
+              <Link href="/contact" onClick={handleMenuClose} className={pathname === "/contact" ? "text-orange-600" : ""}>
                 Contacto
               </Link>
             </div>
