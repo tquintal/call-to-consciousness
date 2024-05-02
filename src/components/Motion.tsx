@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 
 const motionProps = {
   initial: {
-    x: 25,
+    x: 20,
   },
   whileInView: {
     x: 0,

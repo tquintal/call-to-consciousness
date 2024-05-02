@@ -19,7 +19,7 @@ export default function Path() {
 
   return (
     <div className="flex flex-col pb-8 bg-[#F3F3F3] pt-28">
-      <video loop autoPlay className="w-full h-44 bg-slate-300 object-cover">
+      <video playsInline controls={false} autoPlay loop muted className="w-full h-44 bg-slate-300 object-cover">
         <source src="/video.webm" type="video/webm" />
         Your browser does not support the video tag.
       </video>
@@ -27,7 +27,9 @@ export default function Path() {
         {content.map((el, i) => (
           <div key={i} className="flex flex-col gap-8">
             <div className="grid grid-flow-row xl:grid-flow-col xl:grid-cols-8">
-              <Title>{el.pathTitle}</Title>
+              <Motion>
+                <Title>{el.pathTitle}</Title>
+              </Motion>
               <div className="xl:col-span-6">
                 {el.items.map((item, i) => (
                   <Motion key={i} className="pt-4 grid grid-flow-row xl:grid-flow-col xl:grid-cols-8 xl:pt-0">

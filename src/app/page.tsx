@@ -1,7 +1,7 @@
 import Image from "next/image";
-import call_to_consciousness from "../../public/call-to-consciousness.png";
-import avatar from "../../public/avatar.jpg";
 import Link from "next/link";
+import avatar from "../../public/avatar.jpg";
+import call_to_consciousness from "../../public/call-to-consciousness.png";
 
 export default function Home() {
   return (
@@ -9,6 +9,7 @@ export default function Home() {
       <Image
         src={call_to_consciousness}
         alt="Call to consciousness"
+        priority
         loading="eager"
         className="rounded-full sm:h-96 sm:w-96 bg-zinc-300"
       />
@@ -18,6 +19,7 @@ export default function Home() {
           <Image
             src={avatar}
             alt="Avatar"
+            priority
             loading="eager"
             className="sm:h-32 sm:w-32 h-24 w-24 rounded-full max-sm:hidden object-cover bg-zinc-300"
           />
