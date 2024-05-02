@@ -13,7 +13,8 @@
       "Direct mailing; sms; gestão de grupos e comunidades",
       "Organização de eventos | Workshops",
       "Estabelecimento de parcerias"
-    ]
+    ],
+    "image": "/cm.jpg"
   },
   {
     "title": "Comunicação Institucional e de projetos",
@@ -24,6 +25,7 @@
       "Assessoria de Imprensa",
       "Gestão de projetos",
       "Angariação de fundos"
-    ]
+    ],
+    "image": "/communication.jpg"
   }
 ]

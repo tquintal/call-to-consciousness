@@ -2,11 +2,13 @@ import { Divider, Layout, SmallerTitle, SubTitle, Title } from "../../components
 import data from "../../data/services.json";
 import { Motion } from "../../components/Motion";
 import ContactForm from "@/components/ContactForm";
+import Image from "next/image";
 
 type ServicesType = {
   title: string;
   description?: string;
   content: string[];
+  image?: string;
 };
 
 export default function Services() {
@@ -27,7 +29,18 @@ export default function Services() {
                 </ul>
               ))}
             </div>
-            <div className="h-72 w-full md:max-w-96 bg-slate-300" />
+            {el.image ? (
+              <Image
+                loading="eager"
+                src={el.image}
+                alt={el.title}
+                width={400}
+                height={400}
+                className="h-72 w-full md:max-w-96 shadow-lg object-cover"
+              />
+            ) : (
+              <div className="w-full h-72 md:max-w-96 bg-slate-300 shadow-lg" />
+            )}
           </Motion>
         ))}
         <Divider className="mt-4 mb-4" />
