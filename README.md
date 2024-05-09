@@ -8,4 +8,4 @@
 
 🚀 Furthermore, I'm implementing these features using **tRPC**, a framework for building type-safe APIs. This ensures robust communication between the front-end and back-end, enhancing the overall performance and reliability of the application.
 
-🔗 [Preview](https://call-to-consciousness.vercel.app/)
+🔗 [Preview](https://call-to-consciousness.com/)
