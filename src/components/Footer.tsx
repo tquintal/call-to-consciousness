@@ -11,8 +11,8 @@ const Footer = () => {
       </div>
       <div className="flex flex-col gap-1">
         <span className="font-semibold">E-mail</span>
-        <a href="mailto:raiseyourvoicearoundtheworld@gmail.com" className="break-all text-pretty">
-          raiseyourvoicearoundtheworld@gmail.com
+        <a href="mailto:call.to.consciousness@gmail.com" className="break-all text-pretty">
+          call.to.consciousness@gmail.com
         </a>
       </div>
       <div className="flex flex-col gap-1">

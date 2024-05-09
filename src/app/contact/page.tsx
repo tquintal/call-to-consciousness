@@ -17,7 +17,7 @@ export default function Contact() {
           </div>
           <div className="flex flex-col">
             <span className="font-semibold">E-mail</span>
-            <span>raiseyourvoicearoundtheworld@gmail.com</span>
+            <span>call.to.consciousness@gmail.com</span>
           </div>
         </div>
         <ContactForm />

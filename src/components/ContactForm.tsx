@@ -1,9 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { toast } from "react-toastify";
-
-import sendEmail from "@/app/api/submit-form";
 import { ContactFormType } from "@/types/ContactFormType";
 
 const ContactForm = () => {
@@ -18,31 +15,35 @@ const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const form = e.target as HTMLFormElement;
 
-    await toast.promise(sendEmail({ data: formData }), {
-      pending: "A enviar mensagem...",
-      success: "Obrigado pela sua mensagem, entrarei em contacto em breve!",
-      error: "Erro, por favor contacte o e-mail no rodapé",
-    });
+    setSubmitting(true);
 
-    form.reset();
-    setFormData(undefined);
-    setSubmitting(false);
+    setTimeout(() => {
+      form.reset();
+      setFormData(undefined);
+      setSubmitting(false);
+    }, 5000);
   };
 
   return (
-    <form className="grid grid-cols-4 gap-4" onSubmit={handleSubmit}>
+    <form
+      target="_blank"
+      action="https://formsubmit.co/call.to.consciousness@gmail.com"
+      method="POST"
+      onSubmit={handleSubmit}
+      className="grid grid-cols-4 gap-4"
+    >
+      <input type="hidden" name="_template" value="box" />
+      <input type="hidden" name="_next" value="http://localhost:3000/contact" />
+      <input type="hidden" name="_subject" value={formData?.subject ?? "Nova mensagem em call-to-consciousness.com"} />
       <div className="col-span-4 sm:col-span-2 flex flex-col">
         <label>Nome</label>
         <input
           type="text"
           id="fname"
-          name="fname"
+          name="Nome"
           className="p-2 border border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
         />
@@ -52,7 +53,7 @@ const ContactForm = () => {
         <input
           type="text"
           id="lname"
-          name="lname"
+          name="Apelido"
           className="p-2 border border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
         />
@@ -62,7 +63,7 @@ const ContactForm = () => {
         <input
           type="email"
           id="email"
-          name="email"
+          name="E-mail"
           required
           className="p-2 border border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
@@ -73,7 +74,7 @@ const ContactForm = () => {
         <input
           type="text"
           id="phone"
-          name="phone"
+          name="Telefone"
           className="p-2 border border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
         />
@@ -83,7 +84,7 @@ const ContactForm = () => {
         <input
           type="text"
           id="subject"
-          name="subject"
+          name="Assunto"
           required
           className="p-2 border border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
@@ -93,7 +94,7 @@ const ContactForm = () => {
         <label>Mensagem*</label>
         <textarea
           id="message"
-          name="message"
+          name="Mensagem"
           required
           className="h-28 p-2 border w-full resize-none border-black outline-none bg-transparent rounded-none"
           onChange={handleChange}
