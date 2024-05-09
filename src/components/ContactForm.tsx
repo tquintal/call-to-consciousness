@@ -36,7 +36,7 @@ const ContactForm = () => {
       className="grid grid-cols-4 gap-4"
     >
       <input type="hidden" name="_template" value="box" />
-      <input type="hidden" name="_next" value="http://localhost:3000/contact" />
+      <input type="hidden" name="_next" value="https://www.call-to-consciousness.com" />
       <input type="hidden" name="_subject" value={formData?.subject ?? "Nova mensagem em call-to-consciousness.com"} />
       <div className="col-span-4 sm:col-span-2 flex flex-col">
         <label>Nome</label>
