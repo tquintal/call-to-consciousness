@@ -29,8 +29,7 @@ const ContactForm = () => {
 
   return (
     <form
-      target="_blank"
-      action="https://formsubmit.co/call.to.consciousness@gmail.com"
+      action="https://formsubmit.co/e2a7f784d5154607b9a8fede5a14b1a5"
       method="POST"
       onSubmit={handleSubmit}
       className="grid grid-cols-4 gap-4"
