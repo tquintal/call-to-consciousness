@@ -1,26 +1,26 @@
 import { ReactNode, createContext, useContext, useState } from "react";
 
-export type PreviewModeType = {
-  previewMode: boolean;
-  setPreviewMode: (val: boolean) => void;
+export type ViewModeType = {
+  isViewMode: boolean;
+  setIsViewMode: (val: boolean) => void;
 };
 
-const PreviewModeContext = createContext<PreviewModeType | undefined>(undefined);
+const ViewModeContext = createContext<ViewModeType | undefined>(undefined);
 
 export const PreviewModeProvider = ({ children }: { children: ReactNode }) => {
   const previewProvider = usePreviewProvider();
-  return <PreviewModeContext.Provider value={previewProvider}>{children}</PreviewModeContext.Provider>;
+  return <ViewModeContext.Provider value={previewProvider}>{children}</ViewModeContext.Provider>;
 };
 
 function usePreviewProvider() {
-  const [previewMode, setPreviewMode] = useState<boolean>(true);
+  const [isViewMode, setIsViewMode] = useState<boolean>(true);
 
   return {
-    previewMode,
-    setPreviewMode,
+    isViewMode,
+    setIsViewMode,
   };
 }
 
-export const usePreviewModeContext = () => {
-  return useContext(PreviewModeContext) as PreviewModeType;
+export const useViewModeContext = () => {
+  return useContext(ViewModeContext) as ViewModeType;
 };
