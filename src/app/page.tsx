@@ -1,18 +1,18 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
-import { About } from '@/components/About';
-import { api } from '@/trpc/server';
+import { About } from "@/components/About";
+import { api } from "@/trpc/server";
 
-import avatar from '../../public/avatar.jpg';
-import call_to_consciousness from '../../public/call-to-consciousness.png';
+import avatar from "../../public/avatar.jpg";
+import call_to_consciousness from "../../public/call-to-consciousness.png";
 
 export default async function Home() {
   const data = await api.about.get();
   if (!data) return <Loading />;
 
   return (
-    <div className="p-8 bg-[#faf1e7] pt-36 flex gap-8 justify-center lg:items-center max-sm:items-center items-start lg:flex-row flex-col">
+    <div className="p-8 bg-[#E3E1DF] pt-36 flex gap-8 justify-center lg:items-center max-sm:items-center items-start lg:flex-row flex-col">
       <Image
         src={call_to_consciousness}
         alt="Call to consciousness"

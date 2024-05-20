@@ -35,7 +35,7 @@ export const About = ({ data }: { data: AboutType | null }) => {
             className="p-2 w-52 font-bold text-8xl outline-none border border-black"
           />
         ) : (
-          <h1 className="text-8xl font-bold max-sm:w-full text-center sm:text-left">{data?.title}</h1>
+          <h1 className="text-8xl font-bold">{data?.title}</h1>
         )}
         <Image
           src={avatar}
