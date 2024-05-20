@@ -1,10 +1,9 @@
 "use client";
 
-import Link from "next/link";
-
-import { usePreviewModeContext } from "@/context/PreviewMode";
+import { useViewModeContext } from "@/context/PreviewMode";
 import { PathItem } from "@prisma/client";
 
+import { CustomLink } from "./CustomLink";
 import { Divider, SmallerTitle, SubTitle, Title } from "./Elements";
 import { Motion } from "./Motion";
 
@@ -15,25 +14,33 @@ type PathType = {
 }[];
 
 export const PathContent = ({ content }: { content: PathType }) => {
-  const { previewMode, setPreviewMode } = usePreviewModeContext();
+  const { isViewMode } = useViewModeContext();
 
-  if (previewMode)
+  if (isViewMode)
     return (
       <>
-        <div className="w-full h-44 bg-slate-300" />
+        <video playsInline controls={false} autoPlay loop muted className="w-full h-44 bg-slate-300 object-cover">
+          <source src="/video.webm" type="video/webm" />
+          Your browser does not support the video tag.
+        </video>
         <div className="flex flex-col gap-8 2xl:pr-52 2xl:pl-52 p-8">
           {content.map((el, i) => (
             <div key={i} className="flex flex-col gap-8">
               <div className="grid grid-flow-row xl:grid-flow-col xl:grid-cols-8">
-                <Title>{el.pathTitle}</Title>
+                <Motion>
+                  <Title>{el.pathTitle}</Title>
+                </Motion>
                 <div className="xl:col-span-6">
                   {el.items.map((item, i) => (
                     <Motion key={i} className="pt-4 grid grid-flow-row xl:grid-flow-col xl:grid-cols-8 xl:pt-0">
                       <span className="xl:col-span-1 font-light">{item.date}</span>
                       <div className="xl:col-span-7">
-                        <SubTitle>{item.title}</SubTitle>
-                        {item.subTitleLink && <Link href={item.subTitleLink} className="font-semibold" />}
-                        {!item.subTitleLink && <SmallerTitle>{item.subTitle}</SmallerTitle>}
+                        <CustomLink link={item.titleLink} className="underline">
+                          <SubTitle>{item.title}</SubTitle>
+                        </CustomLink>
+                        <CustomLink link={item.subTitleLink} className="underline">
+                          <SmallerTitle>{item.subTitle}</SmallerTitle>
+                        </CustomLink>
                         <span className="whitespace-pre-line">{item.content}</span>
                       </div>
                     </Motion>
@@ -47,12 +54,10 @@ export const PathContent = ({ content }: { content: PathType }) => {
       </>
     );
 
-  if (!previewMode) return <EditPathContent content={content} />;
+  return <EditPathContent content={content} />;
 };
 
 const EditPathContent = ({ content }: { content: PathType }) => {
-  // const router = useRouter();
-
   return (
     <>
       <div className="w-full h-44 bg-slate-300" />
@@ -70,7 +75,7 @@ const EditPathContent = ({ content }: { content: PathType }) => {
               </div>
               <div className="xl:col-span-7 flex flex-col gap-4">
                 {el.items.map((item, i) => (
-                  <Motion key={i} className="grid gap-4 grid-flow-row xl:grid-flow-col xl:grid-cols-8">
+                  <div key={i} className="grid gap-4 grid-flow-row xl:grid-flow-col xl:grid-cols-8">
                     <input
                       type="text"
                       defaultValue={item.date ?? ""}
@@ -93,7 +98,7 @@ const EditPathContent = ({ content }: { content: PathType }) => {
                       ></textarea>
                       <button className="self-end border p-3 bg-white border-black text-red-500">Eliminar</button>
                     </div>
-                  </Motion>
+                  </div>
                 ))}
               </div>
             </div>

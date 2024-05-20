@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { usePreviewModeContext } from "@/context/PreviewMode";
+import { useViewModeContext } from "@/context/PreviewMode";
 import { api } from "@/trpc/react";
 import { About as AboutType } from "@prisma/client";
 
@@ -13,19 +13,19 @@ import avatar from "../../public/avatar.jpg";
 export const About = ({ data }: { data: AboutType | null }) => {
   const router = useRouter();
   const [content, setContent] = useState(data);
-  const { previewMode, setPreviewMode } = usePreviewModeContext();
+  const { isViewMode, setIsViewMode } = useViewModeContext();
 
   const update = api.about.update.useMutation({
     onSuccess: () => {
       router.refresh();
-      setPreviewMode(true);
+      setIsViewMode(true);
     },
   });
 
   return (
     <>
       <div className="flex items-center justify-between">
-        {!previewMode ? (
+        {!isViewMode ? (
           <input
             type="text"
             defaultValue={data?.title}
@@ -45,7 +45,7 @@ export const About = ({ data }: { data: AboutType | null }) => {
         />
       </div>
       <div className="flex flex-col gap-4">
-        {!previewMode ? (
+        {!isViewMode ? (
           <>
             <input
               type="text"
@@ -80,7 +80,7 @@ export const About = ({ data }: { data: AboutType | null }) => {
         ) : (
           <h2 className="font-semibold text-xl -mb-4">{data?.subTitle}</h2>
         )}
-        {previewMode && <span className="whitespace-pre-line">{data?.content}</span>}
+        {isViewMode && <span className="whitespace-pre-line">{data?.content}</span>}
       </div>
     </>
   );

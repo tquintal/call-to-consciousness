@@ -3,10 +3,10 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { usePreviewModeContext } from "@/context/PreviewMode";
+import { useViewModeContext } from "@/context/PreviewMode";
 
 const FHeader = () => {
-  const { previewMode, setPreviewMode } = usePreviewModeContext();
+  const { isViewMode, setIsViewMode } = useViewModeContext();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const pathname = usePathname();
 
@@ -44,11 +44,11 @@ const FHeader = () => {
           <span
             className="text-zinc-400"
             onClick={() => {
-              setPreviewMode(!previewMode);
+              setIsViewMode(!isViewMode);
               setIsMenuVisible(false);
             }}
           >
-            {previewMode ? "Editar" : "Previsualizar"}
+            {isViewMode ? "Editar" : "Previsualizar"}
           </span>
           <span className="text-zinc-400">|</span>
           <span className="text-zinc-400">Terminar sessão</span>
