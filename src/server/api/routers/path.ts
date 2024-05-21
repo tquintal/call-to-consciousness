@@ -16,11 +16,12 @@ export const PathSchema = z.object({
 
 export const pathRouter = createTRPCRouter({
   get: publicProcedure.query(async ({ ctx }) => {
-    return ctx.db.path.findMany({
+    const data = await ctx.db.path.findMany({
       include: {
         items: true,
       },
     });
+    return data;
   }),
 
   add: publicProcedure.input(PathSchema).mutation(async ({ ctx, input }) => {
