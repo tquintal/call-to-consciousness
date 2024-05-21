@@ -1,14 +1,12 @@
 "use client";
 
+import { usePath } from "@/app/api/pathApi";
 import { useViewModeContext } from "@/context/PreviewMode";
-import { api } from "@/trpc/react";
 import { Path, PathItem } from "@prisma/client";
 
 import { CustomLink } from "./CustomLink";
 import { Divider, SmallerTitle, SubTitle, Title } from "./Elements";
 import { Motion } from "./Motion";
-import { useRouter } from "next/navigation";
-import { usePath } from "@/app/api/pathApi";
 
 type PathType = Path & { items: PathItem[] };
 
@@ -58,42 +56,6 @@ export const PathContent = ({ content }: { content: PathType[] }) => {
 
 const EditPathContent = ({ content }: { content: PathType[] }) => {
   const { addPath, updatePath, deletePath, deleteItem } = usePath();
-
-  const addTest = {
-    pathTitle: "Exemplo de Caminho",
-    items: [
-      {
-        date: "2021-2022",
-        title: "Título do Item 1",
-        subTitle: "Subtítulo do Item 1",
-        content: "Conteúdo do Item 1",
-      },
-      {
-        date: "2019-2021",
-        title: "Título do Item 2",
-        subTitle: "Subtítulo do Item 2",
-        content: "Conteúdo do Item 2",
-      },
-    ],
-  };
-
-  const updateTest = {
-    pathTitle: "Exemplo de Caminho 2 Updated",
-    items: [
-      {
-        date: "2021-2022",
-        title: "Título do Item 3 Updated",
-        subTitle: "Subtítulo do Item 3",
-        content: "Conteúdo do Item 3",
-      },
-      {
-        date: "2018-2021",
-        title: "Título do Item 4 Updated",
-        subTitle: "Subtítulo do Item 4",
-        content: "Conteúdo do Item 4",
-      },
-    ],
-  };
 
   return (
     <>
@@ -156,4 +118,40 @@ const EditPathContent = ({ content }: { content: PathType[] }) => {
       </div>
     </>
   );
+};
+
+const addTest = {
+  pathTitle: "Exemplo de Caminho",
+  items: [
+    {
+      date: "2021-2022",
+      title: "Título do Item 1",
+      subTitle: "Subtítulo do Item 1",
+      content: "Conteúdo do Item 1",
+    },
+    {
+      date: "2019-2021",
+      title: "Título do Item 2",
+      subTitle: "Subtítulo do Item 2",
+      content: "Conteúdo do Item 2",
+    },
+  ],
+};
+
+const updateTest = {
+  pathTitle: "Exemplo de Caminho 2 Updated",
+  items: [
+    {
+      date: "2021-2022",
+      title: "Título do Item 3 Updated",
+      subTitle: "Subtítulo do Item 3",
+      content: "Conteúdo do Item 3",
+    },
+    {
+      date: "2018-2021",
+      title: "Título do Item 4 Updated",
+      subTitle: "Subtítulo do Item 4",
+      content: "Conteúdo do Item 4",
+    },
+  ],
 };
