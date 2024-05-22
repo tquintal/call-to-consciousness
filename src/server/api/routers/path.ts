@@ -1,18 +1,5 @@
-import { z } from "zod";
-
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
-
-export const PathItem = z.object({
-  date: z.string().nullable(),
-  title: z.string().nullable(),
-  subTitle: z.string().nullable(),
-  content: z.string(),
-});
-
-export const PathSchema = z.object({
-  pathTitle: z.string(),
-  items: z.array(PathItem),
-});
+import { PathFormSchema } from "@/types/Path";
 
 export const pathRouter = createTRPCRouter({
   get: publicProcedure.query(async ({ ctx }) => {
@@ -20,59 +7,62 @@ export const pathRouter = createTRPCRouter({
       include: {
         items: true,
       },
+      orderBy: {
+        id: "asc",
+      },
     });
     return data;
   }),
 
-  add: publicProcedure.input(PathSchema).mutation(async ({ ctx, input }) => {
-    const { pathTitle, items } = input;
-    const newPath = await ctx.db.path.create({
-      data: {
-        pathTitle,
-        items: {
-          create: items,
-        },
-      },
-    });
-    return newPath;
-  }),
+  update: publicProcedure.input(PathFormSchema).mutation(async ({ ctx, input }) => {
+    const { paths } = input;
 
-  update: publicProcedure
-    .input(
-      z.object({
-        id: z.number(),
-        data: PathSchema,
-      })
-    )
-    .mutation(async ({ ctx, input }) => {
-      const { id, data } = input;
-      const { pathTitle, items } = data;
-      const updatedPath = await ctx.db.path.update({
-        where: { id },
-        data: {
-          pathTitle,
-          items: {
-            deleteMany: {},
-            create: items,
-          },
-        },
+    try {
+      const existingPaths = await ctx.db.path.findMany();
+
+      await ctx.db.$transaction(async (db) => {
+        await Promise.all(
+          paths.map(async (path) => {
+            const { id, pathTitle, items } = path;
+            const itemsWithoutIds = items.map(({ id, pathId, ...rest }) => rest);
+
+            if (id) {
+              return db.path.update({
+                where: { id },
+                data: {
+                  pathTitle,
+                  items: {
+                    deleteMany: {},
+                    create: itemsWithoutIds,
+                  },
+                },
+              });
+            } else {
+              return db.path.create({
+                data: {
+                  pathTitle,
+                  items: { create: itemsWithoutIds },
+                },
+              });
+            }
+          })
+        );
+
+        const pathsToDelete = existingPaths.filter((path) => !paths.some((p) => p.id === path.id));
+
+        await Promise.all(
+          pathsToDelete.map(async (path) => {
+            await db.pathItem.deleteMany({ where: { pathId: path.id } });
+            await db.path.delete({ where: { id: path.id } });
+          })
+        );
+
+        return { success: true };
       });
-      return updatedPath;
-    }),
-
-  delete: publicProcedure.input(z.object({ id: z.number() })).mutation(async ({ ctx, input }) => {
-    const { id } = input;
-    await ctx.db.path.delete({
-      where: { id },
-    });
-    return { success: true };
-  }),
-
-  deletePathItem: publicProcedure.input(z.object({ id: z.number() })).mutation(async ({ ctx, input }) => {
-    const { id } = input;
-    await ctx.db.pathItem.delete({
-      where: { id },
-    });
-    return { success: true };
+    } catch (error) {
+      const strError = `Ocorreu um erro durante a atualização dos caminhos: ${error}`;
+      console.error(strError);
+      throw new Error(strError);
+    }
   }),
 });
