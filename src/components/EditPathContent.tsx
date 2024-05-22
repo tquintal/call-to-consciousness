@@ -5,6 +5,7 @@ import { useViewModeContext } from "@/context/PreviewMode";
 import { PathFormSchemaType, PathSchemaType } from "@/types/Path";
 
 import { Divider } from "./Elements";
+import { IoAddOutline, IoTrashBinOutline } from "react-icons/io5";
 
 export const EditPathContent = ({ data }: { data: PathSchemaType[] }) => {
   const { setIsViewMode } = useViewModeContext();
@@ -126,23 +127,27 @@ const NestedItems = ({ nestIndex, control, register }: NestedItemsProps) => {
               {...register(`paths.${nestIndex}.items.${itemIndex}.content`)}
               placeholder="Conteúdo"
               className="min-h-52 w-full outline-none border border-black p-2"
-            ></textarea>
-            <button
-              type="button"
-              onClick={() => removeItem(itemIndex)}
-              className="self-end border p-3 bg-white border-black text-red-500"
-            >
-              Eliminar
-            </button>
-            {itemIndex + 1 == itemFields.length && (
-              <button
-                type="button"
-                onClick={() => appendItem({})}
-                className="self-end border p-3 bg-white border-black text-green-500"
-              >
-                Novo item
-              </button>
-            )}
+            />
+            <div className="flex gap-2 justify-end">
+              {itemFields.length !== 1 && (
+                <button
+                  type="button"
+                  onClick={() => removeItem(itemIndex)}
+                  className="self-end border p-3 bg-white border-black text-red-500"
+                >
+                  <IoTrashBinOutline />
+                </button>
+              )}
+              {itemIndex + 1 == itemFields.length && (
+                <button
+                  type="button"
+                  onClick={() => appendItem({})}
+                  className="self-end border p-3 bg-white border-black text-green-500"
+                >
+                  <IoAddOutline />
+                </button>
+              )}
+            </div>
           </div>
         </div>
       ))}
