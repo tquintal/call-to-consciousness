@@ -1,11 +1,11 @@
 import { useFieldArray, useForm } from "react-hook-form";
+import { IoAddOutline, IoTrashBinOutline } from "react-icons/io5";
 
 import { usePath } from "@/app/api/pathApi";
 import { useViewModeContext } from "@/context/PreviewMode";
 import { PathFormSchemaType, PathSchemaType } from "@/types/Path";
 
 import { Divider } from "./Elements";
-import { IoAddOutline, IoTrashBinOutline } from "react-icons/io5";
 
 export const EditPathContent = ({ data }: { data: PathSchemaType[] }) => {
   const { setIsViewMode } = useViewModeContext();
