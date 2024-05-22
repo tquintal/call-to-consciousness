@@ -42,7 +42,7 @@ export const PathContent = ({ content }: { content: PathSchemaType[] }) => {
                   ))}
                 </div>
               </div>
-              {i + 1 < el.items.length && <Divider />}
+              {i < el.items.length && <Divider />}
             </div>
           ))}
         </div>
