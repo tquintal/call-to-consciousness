@@ -1,9 +1,11 @@
 import { ReactNode } from "react";
 
-export const Layout = ({ children }: { children: ReactNode }) => {
+export const Layout = ({ children, noPadding }: { children: ReactNode; noPadding?: boolean }) => {
   return (
-    <div className="flex flex-col bg-[#F3F3F3] pt-28 lg:min-h-[95vh] justify-center">
-      <div className="flex flex-col gap-8 2xl:pr-52 2xl:pl-52 p-8">{children}</div>
+    <div className={`flex flex-col bg-[#F3F3F3] ${noPadding ? "" : "pt-28"} lg:min-h-[95vh] justify-center items-center`}>
+      <div style={{ maxWidth: "1920px" }} className="flex flex-col gap-8 2xl:px-52 p-8 w-full">
+        {children}
+      </div>
     </div>
   );
 };
