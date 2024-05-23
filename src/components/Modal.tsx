@@ -11,7 +11,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 p-6 lg:p-44">
+    <div className="fixed inset-0 flex items-center justify-center z-50 p-4 lg:p-44">
       <div className="fixed inset-0 bg-black opacity-50" onClick={onClose} />
       <motion.div
         className="relative bg-[#E3E1DF] shadow-lg p-10 z-10 border border-black max-h-[80vh] overflow-y-auto"
