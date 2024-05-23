@@ -42,7 +42,7 @@ const FHeader = () => {
           </Link>
           <span className="text-zinc-400">|</span>
           <span
-            className="text-zinc-400"
+            className="text-zinc-400 cursor-pointer"
             onClick={() => {
               setIsViewMode(!isViewMode);
               setIsMenuVisible(false);
@@ -51,7 +51,7 @@ const FHeader = () => {
             {isViewMode ? "Editar" : "Previsualizar"}
           </span>
           <span className="text-zinc-400">|</span>
-          <span className="text-zinc-400">Terminar sessão</span>
+          <span className="text-zinc-400 cursor-pointer">Terminar sessão</span>
         </div>
         <MdMenu size={32} onClick={() => setIsMenuVisible(true)} cursor="pointer" className="sm:hidden" />
         <AnimatePresence>
