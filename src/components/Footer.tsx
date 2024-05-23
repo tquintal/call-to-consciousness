@@ -24,7 +24,7 @@ const Footer = () => {
       <div className="text-xs flex flex-col gap-1">
         <span>Política de Cookies</span>
         <span>Política de Privacidade</span>
-        <span>© {year} por Raise your voice</span>
+        <span>© {year} por call to consciousness</span>
       </div>
     </div>
   );

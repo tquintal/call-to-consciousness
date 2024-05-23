@@ -32,7 +32,7 @@ export default function Path() {
               <Motion>
                 <Title>{el.pathTitle}</Title>
               </Motion>
-              <div className="xl:col-span-6">
+              <div className="xl:col-span-6 gap-4 flex flex-col">
                 {el.items.map((item, i) => (
                   <Motion key={i} className="pt-4 grid grid-flow-row xl:grid-flow-col xl:grid-cols-8 xl:pt-0">
                     <span className="xl:col-span-1 font-light">{item.date}</span>
