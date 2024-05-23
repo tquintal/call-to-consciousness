@@ -20,6 +20,9 @@ export const pathRouter = createTRPCRouter({
     try {
       const existingPaths = await ctx.db.path.findMany();
 
+      // ! Simulate a slow DB call
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       await ctx.db.$transaction(async (db) => {
         await Promise.all(
           paths.map(async (path) => {

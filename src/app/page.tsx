@@ -9,7 +9,6 @@ import call_to_consciousness from "../../public/call-to-consciousness.png";
 
 export default async function Home() {
   const data = await api.about.get();
-  if (!data) return <Loading />;
 
   return (
     <div className="p-8 bg-[#E3E1DF] pt-36 flex gap-8 justify-center lg:items-center max-sm:items-center items-start lg:flex-row flex-col">
@@ -47,9 +46,3 @@ export default async function Home() {
     </div>
   );
 }
-
-const Loading = () => {
-  return (
-    <div className="p-8 bg-[#E3E1DF] pt-36 h-[95vh] flex items-center justify-center animate-pulse font-light">A carregar...</div>
-  );
-};

@@ -1,17 +1,15 @@
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
+import { useLoadingContext } from "@/context/Loading";
 import { useViewModeContext } from "@/context/PreviewMode";
 import { api } from "@/trpc/react";
 import { PathFormSchemaType } from "@/types/Path";
-import { useLoadingContext } from "@/context/Loading";
-
-import { toast } from "react-toastify";
 
 export const usePath = () => {
   const router = useRouter();
   const { setIsViewMode } = useViewModeContext();
   const { setIsLoading } = useLoadingContext();
-  const notify = () => toast.success("Wow so easy!");
 
   // const getPaths = api.path.get.useQuery();
   const updatePath = api.path.update.useMutation({
@@ -19,9 +17,9 @@ export const usePath = () => {
       router.refresh();
       setIsViewMode(true);
       setIsLoading(false);
-      toast.success("Alterações feitas com sucesso!");
+      toast.success("Alterações efetuadas com sucesso!");
     },
-    onError: (error) => {
+    onError: () => {
       setIsLoading(false);
       toast.error("Erro, verifica todos os campos.");
     },
@@ -30,10 +28,7 @@ export const usePath = () => {
   const handleUpdatePath = async (path: PathFormSchemaType) => {
     setIsLoading(true);
     try {
-      setTimeout(() => {
-        updatePath.mutateAsync(path);
-      }, 2000); // ! TEMP
-      // await updatePath.mutateAsync(path);
+      await updatePath.mutateAsync(path);
     } catch (error) {
       console.error("Failed to update path:", error);
       throw new Error(`Failed to update path: ${error}`);
