@@ -54,7 +54,23 @@ export const EditPathContent = ({ data }: { data: PathSchemaType[] }) => {
         ))}
         <button
           type="button"
-          onClick={() => appendPath({ pathTitle: "", items: [{ content: "" }] })}
+          onClick={() =>
+            appendPath({
+              pathTitle: "",
+              items: [
+                {
+                  id: null,
+                  pathId: null,
+                  content: "",
+                  date: "",
+                  title: "",
+                  titleLink: "",
+                  subTitle: "",
+                  subTitleLink: "",
+                },
+              ],
+            })
+          }
           className="self-end border p-3 bg-white border-black text-green-500"
         >
           Novo percurso
@@ -141,7 +157,18 @@ const NestedItems = ({ nestIndex, control, register }: NestedItemsProps) => {
               {itemIndex + 1 == itemFields.length && (
                 <button
                   type="button"
-                  onClick={() => appendItem({})}
+                  onClick={() =>
+                    appendItem({
+                      id: null,
+                      pathId: null,
+                      content: "",
+                      date: "",
+                      title: "",
+                      titleLink: "",
+                      subTitle: "",
+                      subTitleLink: "",
+                    })
+                  }
                   className="self-end border p-3 bg-white border-black text-green-500"
                 >
                   <IoAddOutline />
