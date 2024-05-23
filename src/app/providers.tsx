@@ -3,12 +3,15 @@
 import { ReactNode } from "react";
 import { PreviewModeProvider } from "@/context/PreviewMode";
 import { TRPCReactProvider } from "@/trpc/react";
+import { LoadingProvider } from "@/context/Loading";
 
 export const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <TRPCReactProvider>
       <PreviewModeProvider>
-        {children}
+        <LoadingProvider>
+          {children}
+        </LoadingProvider>
       </PreviewModeProvider>
     </TRPCReactProvider>
   );
