@@ -13,8 +13,8 @@ export const aboutRouter = createTRPCRouter({
   }),
 
   update: publicProcedure.input(AboutSchema).mutation(async ({ ctx, input }) => {
-    // ! simulate a slow db call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // ! Simulate a slow DB call
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     return ctx.db.about.update({
       where: {

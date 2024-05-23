@@ -4,21 +4,30 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { useLoadingContext } from "@/context/Loading";
 import { useViewModeContext } from "@/context/PreviewMode";
 import { api } from "@/trpc/react";
 import { About as AboutType } from "@prisma/client";
 
 import avatar from "../../public/avatar.jpg";
+import { toast } from "react-toastify";
 
 export const About = ({ data }: { data: AboutType | null }) => {
   const router = useRouter();
   const [content, setContent] = useState(data);
   const { isViewMode, setIsViewMode } = useViewModeContext();
+  const { setIsLoading } = useLoadingContext();
 
   const update = api.about.update.useMutation({
     onSuccess: () => {
       router.refresh();
       setIsViewMode(true);
+      setIsLoading(false);
+      toast.success("Alterações efetuadas com sucesso!");
+    },
+    onError: () => {
+      setIsLoading(false);
+      toast.error("Erro.");
     },
   });
 
@@ -65,13 +74,14 @@ export const About = ({ data }: { data: AboutType | null }) => {
               />
               <button
                 className="border p-3 bg-zinc-300"
-                onClick={() =>
+                onClick={() => {
+                  setIsLoading(true);
                   update.mutate({
                     title: content?.title ?? "Olá",
                     subTitle: content?.subTitle ?? "Sobre mim",
                     content: content?.content ?? "...",
-                  })
-                }
+                  });
+                }}
               >
                 Guardar
               </button>
