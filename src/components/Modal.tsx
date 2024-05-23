@@ -15,7 +15,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       <div className="fixed inset-0 bg-black opacity-50" onClick={onClose} />
       <motion.div
         style={{ maxWidth: "1920px" }}
-        className="relative bg-[#E3E1DF] shadow-lg p-10 z-10 border border-black max-h-[80vh] overflow-y-auto"
+        className="relative bg-white shadow-lg p-10 z-10 border border-black max-h-[80vh] overflow-y-auto"
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.2 }}
