@@ -72,19 +72,24 @@ export const About = ({ data }: { data: AboutType | null }) => {
                 }}
                 className="p-6 h-[485px] outline-none border border-black"
               />
-              <button
-                className="border p-3 bg-zinc-300"
-                onClick={() => {
-                  setIsLoading(true);
-                  update.mutate({
-                    title: content?.title ?? "Olá",
-                    subTitle: content?.subTitle ?? "Sobre mim",
-                    content: content?.content ?? "...",
-                  });
-                }}
-              >
-                Guardar
-              </button>
+              <div className="flex flex-col sm:flex-row gap-2">
+                <button onClick={() => setIsViewMode(true)} className="w-full border border-black p-3 bg-white text-red-500">
+                  Cancelar
+                </button>
+                <button
+                  className="border border-black w-full p-3 bg-white text-green-500"
+                  onClick={() => {
+                    setIsLoading(true);
+                    update.mutate({
+                      title: content?.title ?? "Olá",
+                      subTitle: content?.subTitle ?? "Sobre mim",
+                      content: content?.content ?? "...",
+                    });
+                  }}
+                >
+                  Guardar alterações
+                </button>
+              </div>
             </div>
           </>
         ) : (
