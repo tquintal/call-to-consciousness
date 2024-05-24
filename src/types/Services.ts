@@ -1,13 +1,20 @@
-export type ServicesType = {
-  title: string;
-  description?: string;
-  content: string[];
-  image?: string;
-  link?: string;
-};
+import { z } from "zod";
 
-export type Portfolio = {
-  src: string;
-  description: string;
-  link?: string;
-};
+export const ServiceSchema = z.object({
+  id: z.number().nullish(),
+  title: z.string(),
+  subTitle: z.string().nullish(),
+  content: z.string(),
+  link: z.string().nullish(),
+  image: z.string(),
+});
+
+export const PortfolioSchema = z.object({
+  id: z.number().nullish(),
+  title: z.string(),
+  link: z.string().nullish(),
+  image: z.string(),
+});
+
+export type ServiceType = z.infer<typeof ServiceSchema>;
+export type PortfolioType = z.infer<typeof PortfolioSchema>;

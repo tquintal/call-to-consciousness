@@ -29,7 +29,16 @@ model Services {
   id       Int      @id @default(autoincrement())
   title    String
   subTitle String?
-  content  String[]
+  content  String
+  link     String?
+  image    String
+}
+
+model Portfolio {
+  id       Int      @id @default(autoincrement())
+  title    String
+  link     String?
+  image    String
 }
 
 model About {

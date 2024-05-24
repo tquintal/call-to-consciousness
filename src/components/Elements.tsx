@@ -1,3 +1,4 @@
+import React from "react";
 import { ReactNode } from "react";
 
 export const Layout = ({ children, noPadding }: { children: ReactNode; noPadding?: boolean }) => {
@@ -10,18 +11,44 @@ export const Layout = ({ children, noPadding }: { children: ReactNode; noPadding
   );
 };
 
-export const Title = ({ children }: { children: ReactNode }) => {
-  return <h1 className="font-semibold text-2xl xl:col-span-2">{children}</h1>;
-};
+export const Title = ({ children }: { children: ReactNode }) => <h1 className="font-semibold text-2xl xl:col-span-2">{children}</h1>;
 
-export const SubTitle = ({ children }: { children: ReactNode }) => {
-  return <h2 className="font-semibold text-xl">{children}</h2>;
-};
+export const SubTitle = ({ children }: { children: ReactNode }) => <h2 className="font-semibold text-xl">{children}</h2>;
 
-export const SmallerTitle = ({ children }: { children: ReactNode }) => {
-  return <h3 className="font-semibold">{children}</h3>;
-};
+export const SmallerTitle = ({ children }: { children: ReactNode }) => <h3 className="font-semibold">{children}</h3>;
 
-export const Divider = ({ className }: { className?: string }) => {
-  return <div className={`border border-b-0 border-zinc-400 w-full ${className ? className : ""}`} />;
+export const Divider = ({ className }: { className?: string }) => (
+  <div className={`border border-b-0 border-zinc-400 w-full ${className ? className : ""}`} />
+);
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(props, ref) {
+  const { className, ...rest } = props;
+  return <input {...rest} ref={ref} className={`p-2 w-full h-fit outline-none border border-black ${className || ""}`} />;
+});
+
+export { Input };
+
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
+
+const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(function TextArea(props, ref) {
+  const { className, ...rest } = props;
+  return <textarea {...rest} ref={ref} className={`min-h-52 w-full outline-none border border-black p-2 ${className || ""}`} />;
+});
+
+export { TextArea };
+
+interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+  type?: "button" | "submit" | "reset";
+}
+
+export const Button = ({ props, children }: { props: ButtonProps; children: ReactNode }) => {
+  const { className, ...rest } = props;
+
+  return (
+    <button {...rest} className={`border p-3 border-black bg-white ${className || ""}`}>
+      {children}
+    </button>
+  );
 };

@@ -16,3 +16,27 @@ export const getMonthYear = () => {
 
   return `${month}/${year}`;
 };
+
+export function fileToBase64(fileList: FileList): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    const file = fileList[0];
+
+    if (!file) {
+      reject(new Error("Nenhum ficheiro selecionado"));
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const base64String = reader.result as string;
+      resolve(base64String);
+    };
+
+    reader.onerror = () => {
+      reject(new Error("Erro ao ler o ficheiro"));
+    };
+
+    reader.readAsDataURL(file);
+  });
+}

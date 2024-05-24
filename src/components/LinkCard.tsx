@@ -2,10 +2,15 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Portfolio } from "@/types/Services";
 import { CustomLink } from "./CustomLink";
 
-export const LinkCard = ({ src, description, link }: Portfolio) => {
+interface Props {
+  src: string;
+  description: string;
+  link?: string | null;
+}
+
+export const LinkCard = ({ src, description, link }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
