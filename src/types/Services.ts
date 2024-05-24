@@ -16,5 +16,11 @@ export const PortfolioSchema = z.object({
   image: z.string(),
 });
 
+export const ServicesPortfolioFormSchema = z.object({
+  services: z.array(ServiceSchema),
+  portfolios: z.array(PortfolioSchema),
+});
+
 export type ServiceType = z.infer<typeof ServiceSchema>;
 export type PortfolioType = z.infer<typeof PortfolioSchema>;
+export type ServicesPortfolioFormType = z.infer<typeof ServicesPortfolioFormSchema>;

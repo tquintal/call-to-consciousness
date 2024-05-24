@@ -12,6 +12,7 @@ import { PortfolioType, ServiceType } from "@/types/Services";
 
 const ServicesContent = ({ services, portfolio }: { services: ServiceType[]; portfolio: PortfolioType[] }) => {
   const { isViewMode } = useViewModeContext();
+
   if (isViewMode)
     return (
       <Layout>
