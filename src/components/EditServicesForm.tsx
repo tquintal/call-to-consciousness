@@ -8,6 +8,8 @@ import { Button, Divider, Input, Layout, TextArea, Title } from "./Elements";
 import { useState } from "react";
 import { PortfolioType, ServiceType } from "@/types/Services";
 import { fileToBase64 } from "@/utils/utils";
+import { useServices } from "@/app/api/servicesApi";
+import { useViewModeContext } from "@/context/PreviewMode";
 
 type ServiceFormSchemaType = {
   services: ServiceType[];
@@ -18,9 +20,13 @@ type PortfolioFormSchemaType = {
 };
 
 const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfolio: PortfolioType[] }) => {
-  // ! TER A CERTEZA QUE services E portfolio CHEGAM
+  // ! TER A CERTEZA QUE "services" E "portfolio" CHEGAM
+  const { setIsViewMode } = useViewModeContext();
+
   const [servicesImages, setServicesImages] = useState<string[]>(services.map((el) => el.image));
   const [portfolioImages, setPortfolioImages] = useState<string[]>(portfolio.map((el) => el.image));
+
+  const { updateServices } = useServices();
 
   const { control, handleSubmit, register } = useForm<ServiceFormSchemaType & PortfolioFormSchemaType>({
     defaultValues: {
@@ -48,12 +54,32 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
   });
 
   const onSubmit = async (data: ServiceFormSchemaType & PortfolioFormSchemaType) => {
-    console.log(data);
-    console.log(servicesImages, portfolioImages);
+    const updatedData = {
+      ...data,
+      services: data.services.map((service, index) => ({
+        ...service,
+        image: servicesImages[index],
+      })),
+      portfolios: data.portfolios.map((portfolio, index) => ({
+        ...portfolio,
+        image: portfolioImages[index],
+      })),
+    };
+
+    updateServices(updatedData);
   };
 
-  const handleFileChange = async ({ e, forServices }: { e: React.ChangeEvent<HTMLInputElement>; forServices?: boolean }) => {
+  const handleFileChange = async ({
+    e,
+    index,
+    forServices,
+  }: {
+    e: React.ChangeEvent<HTMLInputElement>;
+    index: number;
+    forServices?: boolean;
+  }) => {
     const file = e.target.files && e.target.files[0];
+    const image = await fileToBase64(e.target.files || new FileList());
 
     if (file) {
       if (file.size > 2 * 1024 * 1024) {
@@ -61,11 +87,18 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
         e.target.value = "";
         return;
       }
-      const image = await fileToBase64(e.target.files || new FileList());
       if (forServices) {
-        setServicesImages((prev) => (prev ? [...prev, image] : [image]));
+        setServicesImages((prev) => {
+          const updatedImages = [...prev];
+          updatedImages[index] = image;
+          return updatedImages;
+        });
       } else {
-        setPortfolioImages((prev) => (prev ? [...prev, image] : [image]));
+        setPortfolioImages((prev) => {
+          const updatedImages = [...prev];
+          updatedImages[index] = image;
+          return updatedImages;
+        });
       }
     }
   };
@@ -86,7 +119,8 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
                   type="file"
                   accept=".png, .jpeg, .jpg"
                   {...register(`services.${index}.image` as const)}
-                  onChange={(e) => handleFileChange({ e, forServices: true })}
+                  onChange={(e) => handleFileChange({ e, index, forServices: true })}
+                  required
                 />
               </div>
               {servicesImages && servicesImages[index] && (
@@ -146,13 +180,14 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
                 />
               )}
               <div className="flex flex-col gap-4 sm:min-w-96">
-                <Input type="text" placeholder="Título" {...register(`portfolios.${index}.title` as const)} />
+                <Input type="text" placeholder="Título" {...register(`portfolios.${index}.title` as const)} required />
                 <Input type="text" placeholder="Link" {...register(`portfolios.${index}.link` as const)} className="text-blue-600" />
                 <Input
                   type="file"
                   accept=".png, .jpeg, .jpg"
                   {...register(`portfolios.${index}.image` as const)}
-                  onChange={(e) => handleFileChange({ e })}
+                  onChange={(e) => handleFileChange({ e, index })}
+                  required
                 />
                 <div className="flex gap-2 justify-end sm:justify-start"></div>
               </div>
@@ -187,9 +222,11 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
             {index < portfolioFields.length && <Divider />}
           </div>
         ))}
-        <div className="flex justify-end gap-2">
-          <Button props={{ type: "button", className: "text-red-500" }}>Cancelar</Button>
-          <Button props={{ type: "submit", className: "text-green-500" }}>Guardar alterações</Button>
+        <div className="flex justify-between max-sm:border-t max-sm:border-black max-sm:p-3 sm:justify-end gap-2 max-sm:bg-white w-full max-sm:left-0 fixed bottom-0 sm:bottom-10 sm:right-10">
+          <Button props={{ type: "button", className: "text-red-500 shadow-md max-sm:w-full", onClick: () => setIsViewMode(true) }}>
+            Cancelar
+          </Button>
+          <Button props={{ type: "submit", className: "text-green-500 shadow-md max-sm:w-full" }}>Guardar alterações</Button>
         </div>
       </form>
     </Layout>
