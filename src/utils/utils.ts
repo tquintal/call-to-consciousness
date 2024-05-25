@@ -17,26 +17,37 @@ export const getMonthYear = () => {
   return `${month}/${year}`;
 };
 
-export function fileToBase64(fileList: FileList): Promise<string> {
-  return new Promise<string>((resolve, reject) => {
-    const file = fileList[0];
+function fileToBase64(input: string | FileList): Promise<string> {
+  return new Promise((resolve, reject) => {
+    if (typeof input === "string") {
+      resolve(input);
+    } else if (input instanceof FileList) {
+      if (input.length === 0) {
+        reject(new Error("FileList is empty"));
+      }
 
-    if (!file) {
-      reject(new Error("Nenhum ficheiro selecionado"));
-      return;
+      const file = input[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const result = reader.result as string;
+        resolve(result);
+      };
+
+      reader.onerror = () => {
+        reject(new Error("Failed to read file"));
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      reject(new Error("Invalid input type"));
     }
-
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      const base64String = reader.result as string;
-      resolve(base64String);
-    };
-
-    reader.onerror = () => {
-      reject(new Error("Erro ao ler o ficheiro"));
-    };
-
-    reader.readAsDataURL(file);
   });
+}
+
+export async function processImage(image: string | FileList): Promise<string> {
+  if (!image) {
+    throw new Error("Image is not provided");
+  }
+  return fileToBase64(image);
 }

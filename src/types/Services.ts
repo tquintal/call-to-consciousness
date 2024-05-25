@@ -6,14 +6,14 @@ export const ServiceSchema = z.object({
   subTitle: z.string().nullish(),
   content: z.string(),
   link: z.string().nullish(),
-  image: z.string(),
+  image: z.any(),
 });
 
 export const PortfolioSchema = z.object({
   id: z.number().nullish(),
   title: z.string(),
   link: z.string().nullish(),
-  image: z.string(),
+  image: z.any(),
 });
 
 export const ServicesPortfolioFormSchema = z.object({

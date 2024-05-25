@@ -4,12 +4,12 @@ import Image from "next/image";
 import { useFieldArray, useForm } from "react-hook-form";
 import { IoAddOutline, IoTrashBinOutline } from "react-icons/io5";
 
-import { Button, Divider, Input, Layout, TextArea, Title } from "./Elements";
-import { useState } from "react";
-import { PortfolioType, ServiceType } from "@/types/Services";
-import { fileToBase64 } from "@/utils/utils";
 import { useServices } from "@/app/api/servicesApi";
 import { useViewModeContext } from "@/context/PreviewMode";
+import { PortfolioType, ServiceType } from "@/types/Services";
+import { processImage } from "@/utils/utils";
+
+import { Button, Divider, Input, Layout, TextArea, Title } from "./Elements";
 
 type ServiceFormSchemaType = {
   services: ServiceType[];
@@ -20,14 +20,8 @@ type PortfolioFormSchemaType = {
 };
 
 const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfolio: PortfolioType[] }) => {
-  // ! TER A CERTEZA QUE "services" E "portfolio" CHEGAM
   const { setIsViewMode } = useViewModeContext();
-
-  const [servicesImages, setServicesImages] = useState<string[]>(services.map((el) => el.image));
-  const [portfolioImages, setPortfolioImages] = useState<string[]>(portfolio.map((el) => el.image));
-
   const { updateServices } = useServices();
-
   const { control, handleSubmit, register } = useForm<ServiceFormSchemaType & PortfolioFormSchemaType>({
     defaultValues: {
       services: services,
@@ -53,55 +47,38 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
     name: "portfolios",
   });
 
-  const onSubmit = async (data: ServiceFormSchemaType & PortfolioFormSchemaType) => {
-    const updatedData = {
-      ...data,
-      services: data.services.map((service, index) => ({
-        ...service,
-        image: servicesImages[index],
-      })),
-      portfolios: data.portfolios.map((portfolio, index) => ({
-        ...portfolio,
-        image: portfolioImages[index],
-      })),
-    };
+  async function onSubmit(data: ServiceFormSchemaType & PortfolioFormSchemaType) {
+    try {
+      const updatedServices = await Promise.all(
+        data.services.map(async (el) => {
+          const result = await processImage(el.image);
+          return {
+            ...el,
+            image: result,
+          };
+        })
+      );
 
-    updateServices(updatedData);
-  };
+      const updatedPortfolio = await Promise.all(
+        data.portfolios.map(async (el) => {
+          const result = await processImage(el.image);
+          return {
+            ...el,
+            image: result,
+          };
+        })
+      );
 
-  const handleFileChange = async ({
-    e,
-    index,
-    forServices,
-  }: {
-    e: React.ChangeEvent<HTMLInputElement>;
-    index: number;
-    forServices?: boolean;
-  }) => {
-    const file = e.target.files && e.target.files[0];
-    const image = await fileToBase64(e.target.files || new FileList());
+      const result = {
+        services: [...updatedServices],
+        portfolios: [...updatedPortfolio],
+      };
 
-    if (file) {
-      if (file.size > 2 * 1024 * 1024) {
-        alert(`O ficheiro é demasiado grande. Por favor, seleciona um ficheiro menor que ${2}MB.`);
-        e.target.value = "";
-        return;
-      }
-      if (forServices) {
-        setServicesImages((prev) => {
-          const updatedImages = [...prev];
-          updatedImages[index] = image;
-          return updatedImages;
-        });
-      } else {
-        setPortfolioImages((prev) => {
-          const updatedImages = [...prev];
-          updatedImages[index] = image;
-          return updatedImages;
-        });
-      }
+      updateServices(result);
+    } catch (error) {
+      console.error("Error updating services and portfolio:", error);
     }
-  };
+  }
 
   return (
     <Layout>
@@ -119,30 +96,27 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
                   type="file"
                   accept=".png, .jpeg, .jpg"
                   {...register(`services.${index}.image` as const)}
-                  onChange={(e) => handleFileChange({ e, index, forServices: true })}
-                  required
+                  required={!!!service.image}
                 />
               </div>
-              {servicesImages && servicesImages[index] && (
+              {service.image && (
                 <Image
-                  src={servicesImages[index]}
+                  src={service.image}
                   alt={service.title}
                   loading="lazy"
-                  width={400}
-                  height={400}
-                  className="h-72 w-full md:max-w-96 shadow-lg object-cover"
+                  width={0}
+                  height={0}
+                  className="h-72 w-full sm:w-96 shadow-lg object-cover"
                 />
               )}
+              {!service.image && <div className="h-72 w-full bg-slate-200 md:max-w-96 shadow-lg object-cover" />}
             </div>
             <div className="flex gap-2 justify-end sm:justify-start">
               {serviceFields.length > 1 && (
                 <Button
                   props={{
                     type: "button",
-                    onClick: () => {
-                      removeService(index);
-                      setServicesImages((prev) => prev?.filter((_, i) => i !== index));
-                    },
+                    onClick: () => removeService(index),
                     className: "text-red-500",
                   }}
                 >
@@ -169,16 +143,17 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
         {portfolioFields.map((portfolio, index) => (
           <div key={portfolio.id} className="flex flex-col gap-4">
             <div className="flex flex-col sm:flex-row gap-4">
-              {portfolioImages && portfolioImages[index] && (
+              {portfolio.image && (
                 <Image
-                  src={portfolioImages[index]}
+                  src={portfolio.image}
                   alt={portfolio.title}
                   loading="lazy"
-                  width={400}
-                  height={400}
-                  className="h-72 w-full md:max-w-96 shadow-lg object-cover"
+                  width={0}
+                  height={0}
+                  className="h-72 w-full sm:w-96 shadow-lg object-cover"
                 />
               )}
+              {!portfolio.image && <div className="h-72 w-full bg-slate-200 md:max-w-96 shadow-lg object-cover" />}
               <div className="flex flex-col gap-4 sm:min-w-96">
                 <Input type="text" placeholder="Título" {...register(`portfolios.${index}.title` as const)} required />
                 <Input type="text" placeholder="Link" {...register(`portfolios.${index}.link` as const)} className="text-blue-600" />
@@ -186,8 +161,7 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
                   type="file"
                   accept=".png, .jpeg, .jpg"
                   {...register(`portfolios.${index}.image` as const)}
-                  onChange={(e) => handleFileChange({ e, index })}
-                  required
+                  required={!!!portfolio.image}
                 />
                 <div className="flex gap-2 justify-end sm:justify-start"></div>
               </div>
@@ -197,10 +171,7 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
                 <Button
                   props={{
                     type: "button",
-                    onClick: () => {
-                      removePortfolio(index);
-                      setPortfolioImages((prev) => prev?.filter((_, i) => i !== index));
-                    },
+                    onClick: () => removePortfolio(index),
                     className: "text-red-500",
                   }}
                 >
