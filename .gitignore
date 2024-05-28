@@ -36,7 +36,3 @@ yarn-error.log*
 next-env.d.ts
 
 .env
-
-# temp
-/prisma/f_schema.prisma
-/src/components/FHeader.tsx

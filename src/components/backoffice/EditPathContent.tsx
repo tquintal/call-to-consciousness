@@ -5,7 +5,7 @@ import { usePath } from "@/app/api/pathApi";
 import { useViewModeContext } from "@/context/PreviewMode";
 import { PathFormSchemaType, PathSchemaType } from "@/types/Path";
 
-import { Divider, Input, TextArea } from "./Elements";
+import { Divider, Input, TextArea } from "../Elements";
 
 export const EditPathContent = ({ data }: { data: PathSchemaType[] }) => {
   const { setIsViewMode } = useViewModeContext();

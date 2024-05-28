@@ -85,6 +85,22 @@ const Header = () => {
                 <Link href="/contact" onClick={handleMenuClose} className={pathname === "/contact" ? "text-orange-600" : ""}>
                   Contacto
                 </Link>
+                {session && (
+                  <>
+                    <span
+                      className="text-zinc-400 cursor-pointer"
+                      onClick={() => {
+                        setIsViewMode(!isViewMode);
+                        setIsMenuVisible(false);
+                      }}
+                    >
+                      {isViewMode ? "Editar" : "Previsualizar"}
+                    </span>
+                    <span className="text-zinc-400 cursor-pointer" onClick={() => signOut()}>
+                      Terminar sessão
+                    </span>
+                  </>
+                )}
               </div>
             </motion.div>
           )}

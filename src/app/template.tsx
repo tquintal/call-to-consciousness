@@ -12,8 +12,8 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 
 export default function Template({ children }: { children: React.ReactNode }) {
-  const paths = ["/", "/path", "/services", "/contact"];
   const key = usePathname();
+  const paths = ["/", "/path", "/services", "/contact"];
   const is404 = !paths.find((el) => el === key);
 
   if (is404) return <>{children}</>;

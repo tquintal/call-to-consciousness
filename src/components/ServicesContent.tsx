@@ -3,7 +3,7 @@
 import { useViewModeContext } from "@/context/PreviewMode";
 import ContactForm from "./ContactForm";
 import { CustomLink } from "./CustomLink";
-import EditServices from "./EditServicesForm";
+import EditServices from "./backoffice/EditServicesForm";
 import { Layout, Title, SubTitle, SmallerTitle, Divider } from "./Elements";
 import { LinkCard } from "./LinkCard";
 import { Motion } from "./Motion";
