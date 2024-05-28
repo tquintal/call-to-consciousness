@@ -5,7 +5,7 @@ import { usePath } from "@/app/api/pathApi";
 import { useViewModeContext } from "@/context/PreviewMode";
 import { PathFormSchemaType, PathSchemaType } from "@/types/Path";
 
-import { Divider } from "./Elements";
+import { Divider, Input, TextArea } from "./Elements";
 
 export const EditPathContent = ({ data }: { data: PathSchemaType[] }) => {
   const { setIsViewMode } = useViewModeContext();
@@ -36,14 +36,9 @@ export const EditPathContent = ({ data }: { data: PathSchemaType[] }) => {
                   onClick={() => removePath(pathIndex)}
                   className="border p-3 h-fit bg-white border-black text-red-500"
                 >
-                  X
+                  <IoTrashBinOutline />
                 </button>
-                <input
-                  required
-                  {...register(`paths.${pathIndex}.pathTitle`)}
-                  placeholder="Título do percurso"
-                  className="font-semibold text-2xl p-2 w-full h-fit outline-none border border-black"
-                />
+                <Input required {...register(`paths.${pathIndex}.pathTitle`)} placeholder="Título do percurso" />
               </div>
               <div className="xl:col-span-7 flex flex-col gap-4">
                 <NestedItems nestIndex={pathIndex} control={control} register={register} />
@@ -111,39 +106,22 @@ const NestedItems = ({ nestIndex, control, register }: NestedItemsProps) => {
   return (
     <>
       {itemFields.map((item, itemIndex) => (
-        <div key={item.id} className="grid gap-4 grid-flow-row xl:grid-flow-col xl:grid-cols-8">
-          <input
-            {...register(`paths.${nestIndex}.items.${itemIndex}.date`)}
-            placeholder="Duração"
-            className="xl:col-span-1 font-light h-fit p-2 outline-none border border-black"
-          />
-          <div className="xl:col-span-7 gap-4 flex flex-col">
-            <input
-              {...register(`paths.${nestIndex}.items.${itemIndex}.title`)}
-              placeholder="Título"
-              className="h-fit w-full font-semibold text-xl p-2 outline-none border border-black"
-            />
-            <input
+        <div key={item.id} className="flex flex-col gap-4">
+          <div className="gap-4 flex flex-col">
+            <Input {...register(`paths.${nestIndex}.items.${itemIndex}.date`)} placeholder="Duração" />
+            <Input {...register(`paths.${nestIndex}.items.${itemIndex}.title`)} placeholder="Título" />
+            <Input
               {...register(`paths.${nestIndex}.items.${itemIndex}.titleLink`)}
               placeholder="Link do título"
-              className="h-fit w-full text-blue-500 p-2 outline-none border border-black"
+              className="text-blue-500"
             />
-            <input
-              {...register(`paths.${nestIndex}.items.${itemIndex}.subTitle`)}
-              placeholder="Sub-título"
-              className="h-fit w-full font-semibold p-2 outline-none border border-black"
-            />
-            <input
+            <Input {...register(`paths.${nestIndex}.items.${itemIndex}.subTitle`)} placeholder="Sub-título" />
+            <Input
               {...register(`paths.${nestIndex}.items.${itemIndex}.subTitleLink`)}
               placeholder="Link do sub-título"
-              className="h-fit w-full text-blue-500 p-2 outline-none border border-black"
+              className="text-blue-500"
             />
-            <textarea
-              required
-              {...register(`paths.${nestIndex}.items.${itemIndex}.content`)}
-              placeholder="Conteúdo"
-              className="min-h-52 w-full outline-none border border-black p-2"
-            />
+            <TextArea required {...register(`paths.${nestIndex}.items.${itemIndex}.content`)} placeholder="Conteúdo" />
             <div className="flex gap-2 justify-end">
               {itemFields.length !== 1 && (
                 <button
