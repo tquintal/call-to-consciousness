@@ -1,4 +1,4 @@
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "@/server/api/trpc";
 import { PathFormSchema } from "@/types/Path";
 
 export const pathRouter = createTRPCRouter({
@@ -14,7 +14,7 @@ export const pathRouter = createTRPCRouter({
     return data;
   }),
 
-  update: publicProcedure.input(PathFormSchema).mutation(async ({ ctx, input }) => {
+  update: protectedProcedure.input(PathFormSchema).mutation(async ({ ctx, input }) => {
     const { paths } = input;
 
     try {

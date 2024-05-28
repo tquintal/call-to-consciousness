@@ -1,11 +1,13 @@
-import { MdClose, MdMenu } from "react-icons/md";
-import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { MdClose, MdMenu } from "react-icons/md";
 import { useViewModeContext } from "@/context/PreviewMode";
 
-const FHeader = () => {
+const Header = () => {
+  const { data: session } = useSession();
   const { isViewMode, setIsViewMode } = useViewModeContext();
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const pathname = usePathname();
@@ -40,18 +42,24 @@ const FHeader = () => {
           <Link href="/contact" className={pathname === "/contact" ? "text-orange-600" : ""}>
             Contacto
           </Link>
-          <span className="text-zinc-400">|</span>
-          <span
-            className="text-zinc-400 cursor-pointer"
-            onClick={() => {
-              setIsViewMode(!isViewMode);
-              setIsMenuVisible(false);
-            }}
-          >
-            {isViewMode ? "Editar" : "Previsualizar"}
-          </span>
-          <span className="text-zinc-400">|</span>
-          <span className="text-zinc-400 cursor-pointer">Terminar sessão</span>
+          {session && (
+            <>
+              <span className="text-zinc-400">|</span>
+              <span
+                className="text-zinc-400 cursor-pointer"
+                onClick={() => {
+                  setIsViewMode(!isViewMode);
+                  setIsMenuVisible(false);
+                }}
+              >
+                {isViewMode ? "Editar" : "Previsualizar"}
+              </span>
+              <span className="text-zinc-400">|</span>
+              <span className="text-zinc-400 cursor-pointer" onClick={() => signOut()}>
+                Terminar sessão
+              </span>
+            </>
+          )}
         </div>
         <MdMenu size={32} onClick={() => setIsMenuVisible(true)} cursor="pointer" className="sm:hidden" />
         <AnimatePresence>
@@ -86,4 +94,4 @@ const FHeader = () => {
   );
 };
 
-export default FHeader;
+export default Header;

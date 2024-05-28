@@ -27,7 +27,7 @@ export const About = ({ data }: { data: AboutType | null }) => {
     },
     onError: () => {
       setIsLoading(false);
-      toast.error("Erro.");
+      toast.error("Erro");
     },
   });
 
