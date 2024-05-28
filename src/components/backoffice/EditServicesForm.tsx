@@ -9,7 +9,7 @@ import { useViewModeContext } from "@/context/PreviewMode";
 import { PortfolioType, ServiceType } from "@/types/Services";
 import { processImage } from "@/utils/utils";
 
-import { Button, Divider, Input, Layout, TextArea, Title } from "./Elements";
+import { Button, Divider, Input, Layout, TextArea, Title } from "../Elements";
 
 type ServiceFormSchemaType = {
   services: ServiceType[];

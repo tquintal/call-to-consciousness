@@ -4,7 +4,7 @@ import { useViewModeContext } from "@/context/PreviewMode";
 import { PathSchemaType } from "@/types/Path";
 
 import { CustomLink } from "./CustomLink";
-import { EditPathContent } from "./EditPathContent";
+import { EditPathContent } from "./backoffice/EditPathContent";
 import { Divider, Layout, SmallerTitle, SubTitle, Title } from "./Elements";
 import { Motion } from "./Motion";
 
