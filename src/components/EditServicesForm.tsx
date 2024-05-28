@@ -86,7 +86,7 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         {serviceFields.map((service, index) => (
           <div key={service.id} className="flex flex-col gap-4">
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:justify-between sm:flex-row gap-4">
               <div className="flex flex-col gap-4 sm:min-w-96">
                 <Input type="text" placeholder="Título" {...register(`services.${index}.title` as const)} required />
                 <Input type="text" placeholder="Subtítulo" {...register(`services.${index}.subTitle` as const)} />
