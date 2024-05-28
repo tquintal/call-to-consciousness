@@ -1,4 +1,4 @@
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "@/server/api/trpc";
 import { ServicesPortfolioFormSchema } from "@/types/Services";
 
 export const servicesRouter = createTRPCRouter({
@@ -10,7 +10,7 @@ export const servicesRouter = createTRPCRouter({
     return ctx.db.portfolio.findMany({ orderBy: { id: "asc" } });
   }),
 
-  update: publicProcedure.input(ServicesPortfolioFormSchema).mutation(async ({ ctx, input }) => {
+  update: protectedProcedure.input(ServicesPortfolioFormSchema).mutation(async ({ ctx, input }) => {
     const { portfolios, services } = input;
 
     try {

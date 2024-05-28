@@ -1,18 +1,20 @@
 "use client";
 
+import { AppProps } from "next/app";
 import { ReactNode } from "react";
+import AuthProvider from "@/context/AuthProvider";
+import { LoadingProvider } from "@/context/Loading";
 import { PreviewModeProvider } from "@/context/PreviewMode";
 import { TRPCReactProvider } from "@/trpc/react";
-import { LoadingProvider } from "@/context/Loading";
 
-export const Providers = ({ children }: { children: ReactNode }) => {
+export const Providers = ({ children, pageProps }: { children: ReactNode; pageProps: AppProps }) => {
   return (
     <TRPCReactProvider>
-      <PreviewModeProvider>
-        <LoadingProvider>
-          {children}
-        </LoadingProvider>
-      </PreviewModeProvider>
+      <AuthProvider>
+        <PreviewModeProvider>
+          <LoadingProvider>{children}</LoadingProvider>
+        </PreviewModeProvider>
+      </AuthProvider>
     </TRPCReactProvider>
   );
 };

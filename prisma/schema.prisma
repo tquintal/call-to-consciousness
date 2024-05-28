@@ -7,6 +7,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id       String    @id @default(cuid())
+  username String    @unique
+  password String
+}
+
 model Path {
   id        Int        @id @default(autoincrement())
   pathTitle String
@@ -14,19 +20,19 @@ model Path {
 }
 
 model PathItem {
-  id           Int      @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   date         String?
   title        String?
   titleLink    String?
   subTitle     String?
   subTitleLink String?
   content      String
-  path         Path?    @relation(fields: [pathId], references: [id])
+  path         Path?   @relation(fields: [pathId], references: [id])
   pathId       Int?
 }
 
 model Services {
-  id       Int      @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   title    String
   subTitle String?
   content  String
@@ -35,10 +41,10 @@ model Services {
 }
 
 model Portfolio {
-  id       Int      @id @default(autoincrement())
-  title    String
-  link     String?
-  image    String
+  id    Int     @id @default(autoincrement())
+  title String
+  link  String?
+  image String
 }
 
 model About {

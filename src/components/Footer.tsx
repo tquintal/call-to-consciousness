@@ -10,7 +10,6 @@ const Footer = () => {
   const [isCookiesModalOpen, setIsCookiesModalOpen] = useState(false);
   const [isPrivacyModalOpen, setIsPrivacyModalOpen] = useState(false);
   const year = new Date().getFullYear();
-  const date = new Date();
 
   return (
     <>
