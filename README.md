@@ -17,12 +17,6 @@
 ![backoffice_3](/screenshots/backoffice_screen_3.png)
 ![backoffice_4](/screenshots/backoffice_screen_4.png)
 
-### Backoffice mobile
-![backoffice_mobile_1](/screenshots/backoffice_mobile_screen_1.png)
-![backoffice_mobile_2](/screenshots/backoffice_mobile_screen_2.png)
-![backoffice_mobile_3](/screenshots/backoffice_mobile_screen_3.png)
-![backoffice_mobile_4](/screenshots/backoffice_mobile_screen_4.png)
-
 ### Website
 ![website_1](/screenshots/screenshot_1.png)
 ![website_1](/screenshots/screenshot_2.png)
