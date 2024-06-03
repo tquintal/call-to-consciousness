@@ -5,7 +5,7 @@ import { usePath } from "@/app/api/pathApi";
 import { useViewModeContext } from "@/context/PreviewMode";
 import { PathFormSchemaType, PathSchemaType } from "@/types/Path";
 
-import { Divider, Input, TextArea } from "../Elements";
+import { Button, Divider, Input, TextArea } from "../Elements";
 
 export const EditPathContent = ({ data }: { data: PathSchemaType[] }) => {
   const { setIsViewMode } = useViewModeContext();
@@ -70,17 +70,11 @@ export const EditPathContent = ({ data }: { data: PathSchemaType[] }) => {
         >
           Novo percurso
         </button>
-        <div className="fixed bottom-4 right-4 flex gap-2">
-          <button
-            type="reset"
-            onClick={() => setIsViewMode(true)}
-            className="self-end border p-3 border-black text-red-500 bg-white xl:bottom-8 xl:right-8 shadow-xl"
-          >
+        <div className="flex justify-between max-sm:border-t max-sm:border-black max-sm:p-3 sm:justify-end gap-2 max-sm:bg-white w-full max-sm:left-0 fixed bottom-0 sm:bottom-10 sm:right-10">
+          <Button props={{ type: "button", className: "text-red-500 shadow-md max-sm:w-full", onClick: () => setIsViewMode(true) }}>
             Cancelar
-          </button>
-          <button type="submit" className="self-end border p-3 border-black text-green-500 bg-white xl:bottom-8 xl:right-8 shadow-xl">
-            Guardar alterações
-          </button>
+          </Button>
+          <Button props={{ type: "submit", className: "text-green-500 shadow-md max-sm:w-full" }}>Guardar alterações</Button>
         </div>
       </div>
     </form>
