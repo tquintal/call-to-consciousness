@@ -11,7 +11,6 @@ export const usePath = () => {
   const { setIsViewMode } = useViewModeContext();
   const { setIsLoading } = useLoadingContext();
 
-  // const getPaths = api.path.get.useQuery();
   const updatePath = api.path.update.useMutation({
     onSuccess: () => {
       router.refresh();
@@ -19,8 +18,12 @@ export const usePath = () => {
       setIsLoading(false);
       toast.success("Alterações efetuadas com sucesso!");
     },
-    onError: () => {
+    onError: (error) => {
       setIsLoading(false);
+      if (error.message === "UNAUTHORIZED") {
+        toast.error("Sem sessão iniciada.");
+        return;
+      }
       toast.error("Erro, verifica todos os campos.");
     },
   });
@@ -36,7 +39,6 @@ export const usePath = () => {
   };
 
   return {
-    // getPaths: getPaths,
     updatePath: handleUpdatePath,
   };
 };

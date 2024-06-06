@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { IoAddOutline, IoTrashBinOutline } from "react-icons/io5";
 
 import { useServices } from "@/app/api/servicesApi";
@@ -10,6 +10,7 @@ import { PortfolioType, ServiceType } from "@/types/Services";
 import { processImage } from "@/utils/utils";
 
 import { Button, Divider, Input, Layout, TextArea, Title } from "../Elements";
+import { toast } from "react-toastify";
 
 type ServiceFormSchemaType = {
   services: ServiceType[];
@@ -22,7 +23,7 @@ type PortfolioFormSchemaType = {
 const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfolio: PortfolioType[] }) => {
   const { setIsViewMode } = useViewModeContext();
   const { updateServices } = useServices();
-  const { control, handleSubmit, register } = useForm<ServiceFormSchemaType & PortfolioFormSchemaType>({
+  const { control, handleSubmit, register, getValues } = useForm<ServiceFormSchemaType & PortfolioFormSchemaType>({
     defaultValues: {
       services: services,
       portfolios: portfolio,
@@ -31,6 +32,7 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
 
   const {
     fields: serviceFields,
+    update: updateServiceFields,
     append: appendService,
     remove: removeService,
   } = useFieldArray({
@@ -40,6 +42,7 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
 
   const {
     fields: portfolioFields,
+    update: updatePortfolioFields,
     append: appendPortfolio,
     remove: removePortfolio,
   } = useFieldArray({
@@ -47,37 +50,38 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
     name: "portfolios",
   });
 
-  async function onSubmit(data: ServiceFormSchemaType & PortfolioFormSchemaType) {
-    try {
-      const updatedServices = await Promise.all(
-        data.services.map(async (el) => {
-          const result = await processImage(el.image);
-          return {
-            ...el,
-            image: result,
-          };
-        })
-      );
+  const handleImageUpload = async (files: FileList, index: number, e: React.ChangeEvent<HTMLInputElement>, isServices?: boolean) => {
+    const MAX_IMAGE_SIZE_MB = 1;
+    const imgSizeMB = files![0].size / 1024 / 1024;
 
-      const updatedPortfolio = await Promise.all(
-        data.portfolios.map(async (el) => {
-          const result = await processImage(el.image);
-          return {
-            ...el,
-            image: result,
-          };
-        })
-      );
+    if (imgSizeMB > MAX_IMAGE_SIZE_MB) {
+      toast.error("Erro, a imagem excede o tamanho máximo permitido (1mb).");
+      e.target.value = "";
+      return;
+    } else {
+      try {
+        const processedImage = await processImage(files);
 
-      const result = {
-        services: [...updatedServices],
-        portfolios: [...updatedPortfolio],
-      };
-
-      updateServices(result);
-    } catch (error) {
-      console.error("Error updating services and portfolio:", error);
+        if (isServices) {
+          const currentValues = getValues(`services.${index}`);
+          const updatedServices = { ...currentValues, image: processedImage };
+          updateServiceFields(index, updatedServices);
+        } else {
+          const currentValues = getValues(`portfolios.${index}`);
+          const updatedPortfolio = { ...currentValues, image: processedImage };
+          updatePortfolioFields(index, updatedPortfolio);
+        }
+      } catch (error) {
+        toast.error(`Error processing image: ${error}`);
+      }
     }
+  };
+
+  async function onSubmit(data: ServiceFormSchemaType & PortfolioFormSchemaType) {
+    updateServices({
+      services: data.services,
+      portfolios: data.portfolios,
+    });
   }
 
   return (
@@ -88,15 +92,20 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
           <div key={service.id} className="flex flex-col gap-4">
             <div className="flex flex-col sm:justify-between sm:flex-row gap-4">
               <div className="flex flex-col gap-4 sm:min-w-96">
-                <Input type="text" placeholder="Título" {...register(`services.${index}.title` as const)} required />
-                <Input type="text" placeholder="Subtítulo" {...register(`services.${index}.subTitle` as const)} />
-                <TextArea placeholder="Conteúdo" {...register(`services.${index}.content` as const)} required />
-                <Input placeholder="Link" {...register(`services.${index}.link` as const)} className="text-blue-600" />
-                <Input
-                  type="file"
-                  accept=".png, .jpeg, .jpg"
-                  {...register(`services.${index}.image` as const)}
-                  required={!!!service.image}
+                <Input type="text" placeholder="Título" {...register(`services.${index}.title`)} required />
+                <Input type="text" placeholder="Subtítulo" {...register(`services.${index}.subTitle`)} />
+                <TextArea placeholder="Conteúdo" {...register(`services.${index}.content`)} required />
+                <Input placeholder="Link" {...register(`services.${index}.link`)} className="text-blue-600" />
+                <Controller
+                  name={`services.${index}.image`}
+                  control={control}
+                  render={() => (
+                    <Input
+                      type="file"
+                      accept=".png, .jpeg, .jpg"
+                      onChange={(e) => e.target.files && handleImageUpload(e.target.files, index, e, true)}
+                    />
+                  )}
                 />
               </div>
               {service.image && (
@@ -155,13 +164,18 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
               )}
               {!portfolio.image && <div className="h-72 w-full bg-slate-200 md:max-w-96 shadow-lg object-cover" />}
               <div className="flex flex-col gap-4 sm:min-w-96">
-                <Input type="text" placeholder="Título" {...register(`portfolios.${index}.title` as const)} required />
-                <Input type="text" placeholder="Link" {...register(`portfolios.${index}.link` as const)} className="text-blue-600" />
-                <Input
-                  type="file"
-                  accept=".png, .jpeg, .jpg"
-                  {...register(`portfolios.${index}.image` as const)}
-                  required={!!!portfolio.image}
+                <Input type="text" placeholder="Título" {...register(`portfolios.${index}.title`)} required />
+                <Input type="text" placeholder="Link" {...register(`portfolios.${index}.link`)} className="text-blue-600" />
+                <Controller
+                  name={`portfolios.${index}.image`}
+                  control={control}
+                  render={() => (
+                    <Input
+                      type="file"
+                      accept=".png, .jpeg, .jpg"
+                      onChange={(e) => e.target.files && handleImageUpload(e.target.files, index, e)}
+                    />
+                  )}
                 />
                 <div className="flex gap-2 justify-end sm:justify-start"></div>
               </div>
