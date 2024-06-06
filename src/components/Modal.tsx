@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { Button } from "./Elements";
 
 type ModalProps = {
   isOpen: boolean;
@@ -7,7 +8,7 @@ type ModalProps = {
   children: ReactNode;
 };
 
-const Modal = ({ isOpen, onClose, children }: ModalProps) => {
+export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
@@ -34,4 +35,24 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
   );
 };
 
-export default Modal;
+type ConfirmationModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  text: string;
+  onConfirm: () => void;
+};
+
+export const ConfirmationModal = ({ isOpen, onClose, text, onConfirm }: ConfirmationModalProps) => {
+  return (
+    <Modal isOpen={isOpen} onClose={onClose}>
+      <div className="flex flex-col gap-2">
+        <span className="font-semibold">Tens a certeza?</span>
+        <span>{text}</span>
+        <div className="flex gap-2 mt-2 justify-end">
+          <Button props={{ type: "button", className: "text-red-500 shadow-md max-sm:w-full", onClick: onClose }}>Não</Button>
+          <Button props={{ type: "button", className: "text-green-500 shadow-md max-sm:w-full", onClick: onConfirm }}>Sim</Button>
+        </div>
+      </div>
+    </Modal>
+  );
+};

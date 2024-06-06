@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { FaLinkedinIn } from "react-icons/fa";
 
-import Modal from "./Modal";
+import { Modal } from "./Modal";
 import { CookiesPolicy, PrivacyPolicy } from "./PrivacyCookiesPolicy";
 
 const Footer = () => {
