@@ -92,7 +92,7 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
     <>
       <Layout>
         <Title>Serviços</Title>
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4">
           {serviceFields.map((service, index) => (
             <div key={service.id} className="flex flex-col gap-4">
               <div className="flex flex-col sm:justify-between sm:flex-row gap-4">
@@ -244,7 +244,10 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
         text="Tens a certeza que desejas guardar?"
         isOpen={isConfirmSaveOpen}
         onClose={() => setIsConfirmSaveOpen(false)}
-        onConfirm={handleSubmit(onSubmit)}
+        onConfirm={() => {
+          setIsConfirmSaveOpen(false);
+          handleSubmit(onSubmit)();
+        }}
       />
     </>
   );
