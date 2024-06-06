@@ -25,8 +25,12 @@ export const About = ({ data }: { data: AboutType | null }) => {
       setIsLoading(false);
       toast.success("Alterações efetuadas com sucesso!");
     },
-    onError: () => {
+    onError: (error) => {
       setIsLoading(false);
+      if (error.message === "UNAUTHORIZED") {
+        toast.error("Sem sessão iniciada.");
+        return;
+      }
       toast.error("Erro");
     },
   });

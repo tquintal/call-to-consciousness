@@ -18,8 +18,14 @@ export const useServices = () => {
       setIsLoading(false);
       toast.success("Alterações efetuadas com sucesso!");
     },
-    onError: () => {
+    onError: (error) => {
       setIsLoading(false);
+      console.clear();
+      console.log(error.message);
+      if (error.message === "UNAUTHORIZED") {
+        toast.error("Sem sessão iniciada.");
+        return;
+      }
       toast.error("Erro, verifica todos os campos.");
     },
   });

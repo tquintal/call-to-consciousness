@@ -16,9 +16,6 @@ export const servicesRouter = createTRPCRouter({
     try {
       const [existingServices, existingPortfolio] = await Promise.all([ctx.db.services.findMany(), ctx.db.portfolio.findMany()]);
 
-      // ! SIMULATE A SLOW DB CALL
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
       await ctx.db.$transaction(async (db) => {
         const portfolioPromises = portfolios.map(async (portfolio) => {
           const { id, title, link, image } = portfolio;
