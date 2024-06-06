@@ -55,7 +55,7 @@ const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfo
     const imgSizeMB = files![0].size / 1024 / 1024;
 
     if (imgSizeMB > MAX_IMAGE_SIZE_MB) {
-      toast.error("Erro, a imagem excede o tamanho máximo permitido (1mb).");
+      toast.error(`Erro, a imagem excede o tamanho máximo permitido (${MAX_IMAGE_SIZE_MB}mb).`);
       e.target.value = "";
       return;
     } else {
