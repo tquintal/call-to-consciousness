@@ -29,14 +29,14 @@ export const PathContent = ({ content }: { content: PathSchemaType[] }) => {
                   {el.items.map((item, i) => (
                     <Motion key={i} className="grid grid-flow-row xl:grid-flow-col xl:grid-cols-8 xl:pt-0">
                       <span className="xl:col-span-1 font-light">{item.date}</span>
-                      <div className="xl:col-span-7">
+                      <div className="xl:col-span-7 flex flex-col">
                         <CustomLink link={item.titleLink} className="underline">
                           <SubTitle>{item.title}</SubTitle>
                         </CustomLink>
                         <CustomLink link={item.subTitleLink} className="underline">
                           <SmallerTitle>{item.subTitle}</SmallerTitle>
                         </CustomLink>
-                        <span className="whitespace-pre-line">{item.content}</span>
+                        <span className="whitespace-pre-line mt-2">{item.content}</span>
                       </div>
                     </Motion>
                   ))}
