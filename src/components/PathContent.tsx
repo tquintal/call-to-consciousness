@@ -36,7 +36,7 @@ export const PathContent = ({ content }: { content: PathSchemaType[] }) => {
                         <CustomLink link={item.subTitleLink} className="underline">
                           <SmallerTitle>{item.subTitle}</SmallerTitle>
                         </CustomLink>
-                        <span className="whitespace-pre-line mt-2">{item.content}</span>
+                        <span className={`whitespace-pre-line ${item.title && item.subTitle ? "mt-2" : ""}`}>{item.content}</span>
                       </div>
                     </Motion>
                   ))}
