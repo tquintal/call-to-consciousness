@@ -23,16 +23,19 @@ type PortfolioFormSchemaType = {
 };
 
 const EditServices = ({ services, portfolio }: { services: ServiceType[]; portfolio: PortfolioType[] }) => {
+  const { setIsViewMode } = useViewModeContext();
+
   const [isConfirmCancelOpen, setIsConfirmCancelOpen] = useState(false);
   const [isConfirmSaveOpen, setIsConfirmSaveOpen] = useState(false);
-  const { setIsViewMode } = useViewModeContext();
-  const { updateServices } = useServices();
+
   const { control, handleSubmit, register, getValues } = useForm<ServiceFormSchemaType & PortfolioFormSchemaType>({
     defaultValues: {
       services: services,
       portfolios: portfolio,
     },
   });
+
+  const { updateServices } = useServices();
 
   const {
     fields: serviceFields,

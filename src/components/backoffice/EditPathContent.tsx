@@ -10,13 +10,16 @@ import { ConfirmationModal } from "../Modal";
 import { useState } from "react";
 
 export const EditPathContent = ({ data }: { data: PathSchemaType[] }) => {
+  const { setIsViewMode } = useViewModeContext();
+
   const [isConfirmCancelOpen, setIsConfirmCancelOpen] = useState(false);
   const [isConfirmSaveOpen, setIsConfirmSaveOpen] = useState(false);
-  const { setIsViewMode } = useViewModeContext();
-  const { updatePath } = usePath();
+
   const { control, handleSubmit, register } = useForm<PathFormSchemaType>({
     defaultValues: { paths: data },
   });
+
+  const { updatePath } = usePath();
 
   const {
     fields: pathFields,
