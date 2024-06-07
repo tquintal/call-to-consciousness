@@ -11,10 +11,15 @@ import { About as AboutType } from "@prisma/client";
 
 import avatar from "../../public/avatar.jpg";
 import { toast } from "react-toastify";
+import { ConfirmationModal } from "./Modal";
 
 export const About = ({ data }: { data: AboutType | null }) => {
   const router = useRouter();
+
+  const [isConfirmCancelOpen, setIsConfirmCancelOpen] = useState(false);
+  const [isConfirmSaveOpen, setIsConfirmSaveOpen] = useState(false);
   const [content, setContent] = useState(data);
+
   const { isViewMode, setIsViewMode } = useViewModeContext();
   const { setIsLoading } = useLoadingContext();
 
@@ -77,20 +82,10 @@ export const About = ({ data }: { data: AboutType | null }) => {
                 className="p-6 h-[485px] outline-none border border-black"
               />
               <div className="flex flex-col sm:flex-row gap-2">
-                <button onClick={() => setIsViewMode(true)} className="w-full border border-black p-3 bg-white text-red-500">
+                <button onClick={() => setIsConfirmCancelOpen(true)} className="w-full border border-black p-3 bg-white text-red-500">
                   Cancelar
                 </button>
-                <button
-                  className="border border-black w-full p-3 bg-white text-green-500"
-                  onClick={() => {
-                    setIsLoading(true);
-                    update.mutate({
-                      title: content?.title ?? "Olá",
-                      subTitle: content?.subTitle ?? "Sobre mim",
-                      content: content?.content ?? "...",
-                    });
-                  }}
-                >
+                <button className="border border-black w-full p-3 bg-white text-green-500" onClick={() => setIsConfirmSaveOpen(true)}>
                   Guardar alterações
                 </button>
               </div>
@@ -101,6 +96,29 @@ export const About = ({ data }: { data: AboutType | null }) => {
         )}
         {isViewMode && <span className="whitespace-pre-line">{data?.content}</span>}
       </div>
+      <ConfirmationModal
+        text="Tens a certeza que desejas descartar as alterações?"
+        isOpen={isConfirmCancelOpen}
+        onClose={() => setIsConfirmCancelOpen(false)}
+        onConfirm={() => {
+          setIsConfirmCancelOpen(false);
+          setIsViewMode(true);
+        }}
+      />
+      <ConfirmationModal
+        text="Tens a certeza que desejas guardar?"
+        isOpen={isConfirmSaveOpen}
+        onClose={() => setIsConfirmSaveOpen(false)}
+        onConfirm={() => {
+          setIsConfirmSaveOpen(false);
+          setIsLoading(true);
+          update.mutate({
+            title: content?.title ?? "Olá",
+            subTitle: content?.subTitle ?? "Sobre mim",
+            content: content?.content ?? "...",
+          });
+        }}
+      />
     </>
   );
 };
