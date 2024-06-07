@@ -22,10 +22,10 @@ const ServicesContent = ({ services, portfolio }: { services: ServiceType[]; por
           </Motion>
           {services.map((el, i) => (
             <Motion key={i} className="flex flex-col gap-4 lg:flex-row justify-between">
-              <div>
+              <div className="flex flex-col">
                 <SubTitle>{el.title}</SubTitle>
                 <SmallerTitle>{el.subTitle}</SmallerTitle>
-                <span className="whitespace-pre-line">{el.content}</span>
+                <span className="whitespace-pre-line mt-2">{el.content}</span>
               </div>
               {el.image ? (
                 <CustomLink link={el.link}>
